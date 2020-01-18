@@ -2,7 +2,7 @@
 
 
 ## About
-Proyecto de gestión para la elaboración de software con el modelo CMMI VERSION 1.3
+Proyecto de gestión para la elaboración de software con el modelo CMMI VERSION 2
 
 [![Source](https://img.shields.io/badge/source-cesardevops%2FEVENTSOFT-blue)](https://github.com/cesardevops/EVENTSOFT)
 [![Latest Stable Version](https://img.shields.io/badge/%20eventsoft-v%201.0-brightgreen)](https://github.com/cesardevops/EVENTSOFT)
