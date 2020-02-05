@@ -1,4 +1,4 @@
-<p align="center"><img src="http://www.cymrental.com/dni/for_github.jpg"></p>
+<p align="center"><img src="http://cymrental.com/dni/eventsoft.png"></p>
 
 
 ## About
