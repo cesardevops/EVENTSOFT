@@ -5,7 +5,7 @@
 Proyecto de gestión para la elaboración de software con el modelo CMMI VERSION 2
 
 [![Source](https://img.shields.io/badge/source-cesardevops%2FEVENTSOFT-blue)](https://github.com/cesardevops/EVENTSOFT)
-[![Latest Stable Version](https://img.shields.io/badge/eventSoft-v1.1-green)](https://github.com/cesardevops/EVENTSOFT)
+[![Latest Stable Version](https://img.shields.io/badge/%20EventSoft-v%201.1-brightgreen)](https://github.com/cesardevops/EVENTSOFT)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
 [![Travis (.org)](https://img.shields.io/badge/build-dev-red)](https://github.com/cesardevops/EVENTSOFT)
 
