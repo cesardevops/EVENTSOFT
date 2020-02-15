@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registrarme!{% endblock %}
+
+{% block body %}
+    <div class="col-sm-5 form-box wow fadeInUp animated" style="    visibility: visible;
+    animation-name: fadeInUp;
+    max-width: 500px;
+    margin: auto;">
+        <div class="form-top">
+            <div class="form-top-left">
+                <h3>Registrate Ahora</h3>
+                <p>Completa los campos, registrate y obten acceso instantáneo:</p>
+            </div>
+            <div class="form-top-right">
+                <i class="fas fa-pencil-alt"></i>
+            </div>
+        </div>
+        <div class="form-bottom">
+
+            {{ form_start(form_register) }}
+            {{ form_errors(form_register) }}
+            {% block block_name %}
+                <div class="form-group">
+                    {{ form_label(form_register.name, 'Nombres', {'label_attr': {'class': 'sr-only'}}) }}
+                    {{ form_errors(form_register.name) }}
+                    {{ form_widget(form_register.name) }}
+                </div>
+            {% endblock %}
+
+            {% block block_surname %}
+                <div class="form-group">
+                    {{ form_label(form_register.surname, 'Apellidos', {'label_attr': {'class': 'sr-only'}}) }}
+                    {{ form_errors(form_register.surname) }}
+                    {{ form_widget(form_register.surname) }}
+                </div>
+            {% endblock %}
+            {% block block_gender %}
+                <div class="form-group">
+                    {{ form_label(form_register.gender, 'Gender', {'label_attr': {'class': 'sr-only'}}) }}
+                    {{ form_errors(form_register.gender) }}
+                    {{ form_widget(form_register.gender) }}
+                </div>
+            {% endblock %}
+
+            {% block block_phone %}
+                <div class="form-group">
+                    {{ form_label(form_register.phone, 'Phone', {'label_attr': {'class': 'sr-only'}}) }}
+                    {{ form_errors(form_register.phone) }}
+                    {{ form_widget(form_register.phone) }}
+                </div>
+            {% endblock %}
+
+            {% block block_email %}
+                <div class="form-group">
+                    {{ form_label(form_register.email, 'Email', {'label_attr': {'class': 'sr-only'}}) }}
+                    {{ form_errors(form_register.email) }}
+                    {{ form_widget(form_register.email) }}
+                </div>
+            {% endblock %}
+            {% block block_password %}
+                <div class="form-group">
+                    {{ form_label(form_register.password, 'Password', {'label_attr': {'class': 'sr-only'}}) }}
+                    {{ form_errors(form_register.password) }}
+                    {{ form_widget(form_register.password) }}
+                </div>
+            {% endblock %}
+
+            <h3 style="
+                  margin-bottom: 15px;
+                  opacity: .6;
+                  font-size: 16px;
+                  ">Fecha de Nacimiento</h3>
+
+            {% block block_date %}
+                <div class="ev-date-control">
+                    {{ form_label(form_register.birthday, 'Fecha de Nacimiento', {'label_attr': {'class': 'sr-only'}}) }}
+                    {{ form_errors(form_register.birthday) }}
+
+                    {{ form_widget(form_register.birthday.day, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_widget(form_register.birthday.month, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_widget(form_register.birthday.year, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            {% endblock %}
+
+            {{ form_widget(form_register.Registrar) }}
+
+            <div class="form-links">
+                <a href="#" class="launch-modal" data-modal-id="modal-privacy">Términos y condiciones</a>
+            </div>
+            {{ form_end(form_register) }}
+
+        </div>
+    </div>
+
+    <script>
+        var timezone_offset_minutes = new Date().getTimezoneOffset();
+        timezone_offset_minutes = timezone_offset_minutes == 0 ? 0 : -timezone_offset_minutes;
+
+        // Timezone difference in minutes such as 330 or -360 or 0
+        console.log(timezone_offset_minutes);
+
+        document.getElementById("register_timezone").value = timezone_offset_minutes;
+    </script>
+{% endblock %}

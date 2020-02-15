@@ -1,0 +1,173 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('assets/_style/cropper.css') }}" />
+    <script src="{{ asset('assets/_js/cropper.js') }}"></script>
+    <script src="{{ asset('assets/_js/cropimage.js') }}"></script>
+
+    <div class="event-edit-profile-body">
+        <main>
+            {{ form_start(form_register, {'attr': {'class': 'frm-event-general'}}) }}
+            <h1>Mi Perfil <i class="fas fa-user-edit"></i></h1>
+
+            {{ form_errors(form_register) }}
+
+            {% block block_name %}
+                {{ form_label(form_register.name, 'Nombres', {'label_attr': {'class': ''}}) }}
+                <div class="form-group">
+                    {{ form_errors(form_register.name) }}
+                    {{ form_widget(form_register.name) }}
+                </div>
+            {% endblock %}
+
+            {% block block_surname %}
+                {{ form_label(form_register.surname, 'Apellidos', {'label_attr': {'class': ''}}) }}
+                <div class="form-group">
+                    {{ form_errors(form_register.surname) }}
+                    {{ form_widget(form_register.surname) }}
+                </div>
+            {% endblock %}
+
+            {% block block_gender %}
+                {{ form_label(form_register.gender, 'Sexo', {'label_attr': {'class': ''}}) }}
+                <div class="form-group">
+                    {{ form_errors(form_register.gender) }}
+                    {{ form_widget(form_register.gender) }}
+                </div>
+            {% endblock %}
+
+            {% block block_date %}
+                {{ form_label(form_register.birthday, 'Fecha de Nacimiento', {'label_attr': {'class': ''}}) }}
+
+                <div class="form-group ev-date-control">
+                    {{ form_errors(form_register.birthday) }}
+                    {{ form_widget(form_register.birthday.day, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_widget(form_register.birthday.month, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_widget(form_register.birthday.year, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            {% endblock %}
+
+            {% block block_phone %}
+                {{ form_label(form_register.phone, 'Phone', {'label_attr': {'class': ''}}) }}
+                <div class="form-group">
+                    {{ form_errors(form_register.phone) }}
+                    {{ form_widget(form_register.phone) }}
+                </div>
+            {% endblock %}
+
+            {% block blockcompany %}
+                {{ form_label(form_register.company, 'Soy Empresa', {'label_attr': {'class': ''}}) }}
+                <div class="form-group">
+                    {{ form_errors(form_register.company) }}
+                    {{ form_widget(form_register.company) }}
+                </div>
+            {% endblock %}
+            {% block block_cid %}
+                {{ form_label(form_register.companyid, 'Doc. Identidad', {'label_attr': {'class': ''}}) }}
+                <div class="form-group">
+                    {{ form_errors(form_register.companyid) }}
+                    {{ form_widget(form_register.companyid) }}
+                </div>
+            {% endblock %}
+            {% block block_description %}
+                {{ form_label(form_register.description, 'Algo sobre mí', {'label_attr': {'class': ''}}) }}
+                <div class="form-group">
+                    {{ form_errors(form_register.description) }}
+                    {{ form_widget(form_register.description) }}
+                </div>
+            {% endblock %}
+
+
+            {% block block_password %}
+                {{ form_label(form_register.password, 'New Password', {'label_attr': {'class': ''}}) }}
+                <div class="form-group">
+                    {{ form_errors(form_register.password) }}
+                    {{ form_widget(form_register.password) }}
+                </div>
+            {% endblock %}
+
+            {{ form_widget(form_register.Registrar) }}
+
+            {{ form_end(form_register) }}
+
+        </main>
+        <aside>
+            <div class="frm-event-general" style="display: grid;
+                margin: 0 auto 0 auto;
+                width: 100%;
+                padding: 1em;
+                padding-bottom: 60px;">
+
+                <div class="form-group" style="
+                    grid-column: 1 / span 2;
+                ">
+                    <h1>Mi Foto <i class="fas fa-expand"></i></h1>
+                    <label class="btn btn-big  btn-block required" style="padding: 0 20px;width: 100%;text-align: center;" for="user_photo_cover_coverprofile">Subir una Foto</label>
+
+                    <input type="file" id="user_photo_cover_coverprofile" name="user_photo_cover[coverprofile]" required="required" accept="image/*" onchange="loadFile(event)" class="sr-only">
+                </div>
+
+                <div class="dropzone" style="
+                display: grid;
+                grid-gap: 1em;
+                grid-column: 1 /span 2;
+            ">
+                    <div class="image-wrapper" style="
+                    grid-column: 1 / span 2;
+                ">
+                        <img id="change-profile-pic" src="" height="300px">
+                    </div>
+
+                    <div class="priview-wraper" style="
+                    grid-column: 1 / span 2;
+                    overflow: hidden;
+                    position: relative;
+                    border-radius: 50%;
+                    height: 180px;
+                    width: 180px;
+                    margin: auto;
+                    border: 1px solid;
+                ">
+                        <div class="preview"></div>
+                    </div>
+                    <p style="grid-column: 1 / span 2;font-size: 14px;text-align: center;text-transform: uppercase;">previsualización</p>
+
+
+                    <input type="button" class="btn btn-big" style="grid-column: 1;grid-row: 2;" value="Cancelar">
+                    <button type="submit" value="Guardar" class="btn btn-primary btn-big" id="save-profile" style="
+                    grid-column: 2;
+                    grid-row: 2;
+                ">Guardar</button>
+                </div>
+
+            </div>
+
+        </aside>
+    </div>
+
+<!--
+    <script >
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#avatar').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        /*
+        $("#user_photo_cover_coverprofile").change(function() {
+            readURL(this);
+        });
+
+*/
+
+    </script> -->
+
+{% endblock %}

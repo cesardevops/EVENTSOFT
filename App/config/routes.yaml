@@ -1,0 +1,32 @@
+index:
+    path:       /
+    controller: App\Controller\HomeController::index
+prices:
+    path:       /table-prices
+    controller: App\Controller\HomeController::prices
+
+login:
+    path:       /login
+    controller: App\Controller\UserController::login
+logout:
+    path: /logout
+register:
+    path:       /register
+    controller: App\Controller\UserController::register
+edit_my_profile:
+    path:       /my-profile/edit
+    controller: App\Controller\UserController::edit
+upload_cover_profile:
+    path:       /my-profile/photo-new
+    controller: App\Controller\UserController::editphoto
+    methods:    POST
+
+event:
+    path: /event
+    controller: App\Controller\EventController::index
+event_create:
+    path: /event/create
+    controller: App\Controller\EventController::create
+test:
+    path: /prueba
+    controller: App\Controller\UserController::saveImage

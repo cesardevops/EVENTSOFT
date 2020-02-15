@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('assets/_style/cropper.css') }}" />
+    <script src="{{ asset('assets/_js/cropper.js') }}"></script>
+    <script src="{{ asset('assets/_js/cropimage.js') }}"></script>
+    <link rel="stylesheet" href="https://unpkg.com/js-datepicker/dist/datepicker.min.css">
+    <script src="https://unpkg.com/js-datepicker"></script>
+
+    <div class="event-body-create-event">
+
+            <main style="flex-direction: column;align-items: start;">
+                <h1 style="display: block;
+                max-width: 100%;
+                font-size: 39px;
+                font-weight: bold;
+                grid-column: 1 / 3;
+                grid-row: 1;">Nuevo Evento <i class="far fa-calendar-plus"></i></h1>
+                {{ form_start(form_register, {'attr': {'novalidate': 'novalidate'}}) }}
+                {{ form_widget(form_register) }}
+                {{ form_end(form_register) }}
+            </main>
+
+        <aside>
+
+        </aside>
+    </div>
+
+{% endblock %}
