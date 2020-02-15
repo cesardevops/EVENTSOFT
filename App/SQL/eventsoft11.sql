@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 14-02-2020 a las 15:06:59
+-- Tiempo de generación: 15-02-2020 a las 13:26:26
 -- Versión del servidor: 5.7.26
 -- Versión de PHP: 7.2.18
 
@@ -114,12 +114,12 @@ CREATE TABLE IF NOT EXISTS `event` (
   `duration` time NOT NULL,
   `description` longtext NOT NULL,
   `title` varchar(100) NOT NULL,
-  `cover_image` varchar(255) NOT NULL,
-  `status` tinyint(1) NOT NULL,
+  `cover_image` varchar(255) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   `addressname` varchar(100) DEFAULT NULL,
   `lat` varchar(45) DEFAULT NULL,
-  `long` varchar(45) DEFAULT NULL,
+  `longt` varchar(45) DEFAULT NULL,
   `categorie_id` int(11) NOT NULL,
   `wordskeys` longtext,
   `classification_id` int(11) NOT NULL,
@@ -129,7 +129,16 @@ CREATE TABLE IF NOT EXISTS `event` (
   KEY `fk_event_user1_idx` (`user_id`),
   KEY `fk_event_categorie1_idx` (`categorie_id`),
   KEY `fk_event_classification1_idx` (`classification_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `event`
+--
+
+INSERT INTO `event` (`id`, `name`, `start_date`, `duration`, `description`, `title`, `cover_image`, `status`, `user_id`, `addressname`, `lat`, `longt`, `categorie_id`, `wordskeys`, `classification_id`, `showguestlist`, `interest`) VALUES
+(1, 'evento 1', '2020-02-14 00:00:00', '10:00:00', 'sdfsdfsdfsdfsdfds', 'itulo', '', 1, 12, 'asdfasdfsadfdsf', NULL, NULL, 7, 'dsfsdfsdfds,sdf,sd,f,dsf,sdfds,f,ds,fds', 1, 1, 0),
+(2, 'la factoria', '2017-02-03 03:06:00', '17:16:00', '<p>adsdfdsf</p>', 'Conciert', '5f7e71afe860c7118afe058d25c8812f-5e46f9496faa7.jpeg', NULL, 12, 'sdfdf', NULL, NULL, 16, 'sdfdsfsdfsdfsd', 1, 1, 0),
+(3, 'la factoria', '2017-02-03 03:06:00', '17:16:00', '<p>adsdfdsf</p>', 'Conciert', '6b322b83696b0815cb6010bff8220070-5e46f959382e9.jpeg', NULL, 12, 'sdfdf', NULL, NULL, 16, 'sdfdsfsdfsdfsd', 1, 1, 0);
 
 -- --------------------------------------------------------
 
