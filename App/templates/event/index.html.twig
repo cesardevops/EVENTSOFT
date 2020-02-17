@@ -52,7 +52,6 @@
                 success: function (data) {
                     $('#firstResult').val( parseInt(firstResult) + parseInt(maxtResult) );
                     $('#total').val(parseInt(data.total));
-                    console.log(data);
                     for (i = 0; i < data.eventos.length; i++) {
                         showEvent(data.eventos[i]);
                     }
@@ -68,7 +67,6 @@
             var div_img = document.createElement('div');
             div_img.className= 'img-thumb';
             var img = document.createElement('img');
-            console.log(eventos.thumb);
             if (eventos.thumb == null)
             {
                 img.src = 'https://dummyimage.com/400x250/fff/aaa';
