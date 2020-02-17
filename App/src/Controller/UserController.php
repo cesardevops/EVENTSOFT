@@ -7,6 +7,7 @@ use App\Form\EditUserType;
 use App\Form\RegisterType;
 use App\Form\UserPhotoCoverType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -64,10 +65,6 @@ class UserController extends AbstractController
                 $user->setPassword($encoded);
                 $user->setRoles("ROLE_USER");
                 $user->setPhoto('0');
-                $new_image_name = uniqid().'.jpg';
-                $filesystem = new Filesystem();
-                $filesystem->touch('images/users/avatars/'.$new_image_name);
-                $user->setCoverprofile($new_image_name);
                 $user->setGender( $user->getGender() == 1 ? 1 : 0);
 
                 # SAVE USER
@@ -130,14 +127,19 @@ class UserController extends AbstractController
     public function editphoto(Request $request){
         $_USERSESSION   = $this->getUser();
         $_id            = $_USERSESSION->getId();
-        $_PHOTOBLOOB    = $request->get("url", null);
+        $_PHOTOBLOOB    = $request->get("image", null);
 
         $entityManager = $this->getDoctrine()->getManager();
         $user = $entityManager->getRepository(User::class)->find($_id);
         if(empty($user))
         {
-            return true;
+            return false;
         }else{
+
+            $name_image = 'ev-db-images-'.uniqid().uniqid().'.jpg';
+            $filesystem = new Filesystem();
+            $filesystem->touch('images/users/avatars/'.$name_image);
+            $user->setCoverprofile($name_image);
 
             $in = fopen($_PHOTOBLOOB, "rb");
             $out = fopen('images/users/avatars/'.$user->getCoverprofile(), "wb");
@@ -152,12 +154,12 @@ class UserController extends AbstractController
             $_EM = $this->getDoctrine()->getManager();
             $_EM->persist($user);
             $_EM->flush();
-            //return true;
-            echo "success";
-            //#return new Response('success');
-        }
 
-        die();
+            $result = [
+                'img' => 'images/users/avatars/'.$name_image
+            ];
+            return new JsonResponse($result,200);
+        }
 
 
     }

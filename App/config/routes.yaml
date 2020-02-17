@@ -24,6 +24,12 @@ upload_cover_profile:
 event:
     path: /event
     controller: App\Controller\EventController::index
+
+events:
+    path: /event/load
+    controller: App\Controller\EventController::getEvents
+    methods:    POST
+
 event_create:
     path: /event/create
     controller: App\Controller\EventController::create

@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Event
  *
  * @ORM\Table(name="event", indexes={@ORM\Index(name="fk_event_categorie1_idx", columns={"categorie_id"}), @ORM\Index(name="fk_event_user1_idx", columns={"user_id"}), @ORM\Index(name="fk_event_classification1_idx", columns={"classification_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
  */
 class Event
 {
@@ -63,6 +63,13 @@ class Event
      * @ORM\Column(name="cover_image", type="string", length=255, nullable=false)
      */
     private $coverImage;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="thumb", type="string", length=100, nullable=true)
+     */
+    private $thumb;
 
     /**
      * @var bool
@@ -216,6 +223,18 @@ class Event
     public function setCoverImage(string $coverImage): self
     {
         $this->coverImage = $coverImage;
+
+        return $this;
+    }
+
+    public function getThumb(): ?string
+    {
+        return $this->thumb;
+    }
+
+    public function setThumb(string $thumb): self
+    {
+        $this->thumb = $thumb;
 
         return $this;
     }

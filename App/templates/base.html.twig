@@ -19,7 +19,8 @@
     <title>EventSoft - {% block title %}Welcome!{% endblock %}</title>
 
     <script type="text/javascript">
-        let URL_EVENTSOFT = '{{ app.request.getSchemeAndHttpHost }}' + '/DEV_EVENTSOFT1.1/public';
+        let URL_PUBLIC = "/EVENTSOFT/App/public/";
+        let URL_EVENTSOFT = '{{ app.request.getSchemeAndHttpHost }}' + '/EVENTSOFT/App/public';
     </script>
 </head>
 
@@ -60,7 +61,7 @@
                             <span class="media-hidden">{{ app.user.name }}</span>
 
                             {% if app.user.photo == 1 %}
-                                <div class="ev-avatar" id="profile-result"><img src="{{asset(varGlobImgAvatars~app.user.coverprofile)}}"></div>
+                                <div class="ev-avatar" id="profile-result"><img id="ev-avatar" src="{{asset(varGlobImgAvatars~app.user.coverprofile)}}"></div>
                             {% else %}
                                 <i class="far fa-grin-beam" style="
                                 height: 50px;
@@ -100,7 +101,6 @@
                                 align-items: center;
                                 ">
                                 <p><i class="fas fa-adjust ev-drop-menu"></i> Modo Oscuro</p>
-                                <!--<input type="checkbox" id="switch" name="theme" />-->
                                 <label class="switch">
                                     <input type="checkbox" id="switch" name="theme">
                                     <span class="slider round"></span>
@@ -139,78 +139,65 @@
 </body>
 <script src="{{ asset('assets/_js/app.js') }}"></script>
 
-<script type="text/javascript">
-    $(document).ready(function () {
+    {% block javascripts %}
+    <script type="text/javascript">
 
-        var screen = $('#ev-loading-screen');
-        configureLoadingScreen(screen);
+        $(document).ready(function () {
 
-    });
-    function configureLoadingScreen(screen) {
-        $(document).ajaxStart(function () {
-            screen.fadeIn();
-        }).ajaxStop(function () {
-            screen.fadeOut();
+            var screen = $('#ev-loading-screen');
+            configureLoadingScreen(screen);
+
         });
-    }
-
-    const $menu = $('.dropdown');
-    const $menu_child = $('.dropdown-menu');
-    $(document).mouseup(e => {
-        if (!$menu.is(e.target) // if the target of the click isn't the container...
-            && $menu.has(e.target).length === 0) // ... nor a descendant of the container
-        {
-            $menu_child.fadeOut(100);
+        function configureLoadingScreen(screen) {
+            $(document).ajaxStart(function () {
+                screen.fadeIn();
+            }).ajaxStop(function () {
+                screen.fadeOut();
+            });
         }
-    });
-    $('.ev-toggle-avatar').on('click', () => {
-        event.preventDefault()
-        $menu_child.fadeToggle(100);
-    });
 
-    function resizeGridItem(item){
-        grid = document.getElementsByClassName("grid-events ")[0];
-        rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
-        rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'));
-        rowSpan = Math.ceil((item.querySelector('.content').getBoundingClientRect().height+rowGap)/(rowHeight+rowGap));
-        item.style.gridRowEnd = "span "+rowSpan;
-    }
+        const $menu = $('.dropdown');
+        const $menu_child = $('.dropdown-menu');
+        $(document).mouseup(e => {
+            if (!$menu.is(e.target) // if the target of the click isn't the container...
+                && $menu.has(e.target).length === 0) // ... nor a descendant of the container
+            {
+                $menu_child.fadeOut(100);
+            }
+        });
+        $('.ev-toggle-avatar').on('click', () => {
+            event.preventDefault()
+            $menu_child.fadeToggle(100);
+        });
 
-    function resizeAllGridItems(){
+        function resizeGridItem(item){
+            grid = document.getElementsByClassName("grid-events ")[0];
+            rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
+            rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'));
+            rowSpan = Math.ceil((item.querySelector('.content').getBoundingClientRect().height+rowGap)/(rowHeight+rowGap));
+            item.style.gridRowEnd = "span "+rowSpan;
+        }
+
+        function resizeAllGridItems(){
+            allItems = document.getElementsByClassName("item ");
+            for(x=0;x<allItems.length;x++){
+                resizeGridItem(allItems[x]);
+            }
+        }
+
+        function resizeInstance(instance){
+            item = instance.elements[0];
+            resizeGridItem(item);
+        }
+
+        window.onload = resizeAllGridItems();
+        window.addEventListener("resize ", resizeAllGridItems);
+
         allItems = document.getElementsByClassName("item ");
         for(x=0;x<allItems.length;x++){
-            resizeGridItem(allItems[x]);
+            imagesLoaded( allItems[x], resizeInstance);
         }
-    }
+    </script>
+{% endblock %}
 
-    function resizeInstance(instance){
-        item = instance.elements[0];
-        resizeGridItem(item);
-    }
-
-    window.onload = resizeAllGridItems();
-    window.addEventListener("resize ", resizeAllGridItems);
-
-    allItems = document.getElementsByClassName("item ");
-    for(x=0;x<allItems.length;x++){
-        imagesLoaded( allItems[x], resizeInstance);
-    }
-/*
-    function openNav() {
-        document.getElementById("ev-side-login-register").style.right   = "0px";
-        document.getElementById("display-ev-back").style.display   = "block";
-        document.body.style.overflowY = "hidden";
-    }
-
-    function closeNav() {
-        document.getElementById("ev-side-login-register").style.right  = "-1000px";
-        document.getElementById("display-ev-back").style.display  = "none";
-        document.body.style.overflowY = "auto";
-    }
-    */
-
-
-</script>
-
-{% block javascripts %}{% endblock %}
 </html>

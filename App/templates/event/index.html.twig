@@ -4,5 +4,157 @@
 
 {% block body %}
 
-    {{ dump(eventos) }}
+    <input type="hidden" id="firstResult" value="0">
+    <input type="hidden" id="maxResult" value="10">
+    <input type="hidden" id="total" value="10">
+    <div class="grid-events" id="result">
+    </div>
+
+
+    <!-- template -->
+    <template id="template-whit-img">
+            <div class="item photo">
+                <div class="content">
+                    <div class="title">
+                        <h3></h3>
+                    </div>
+                    <img class="photothumb" src="">
+                    <div class="event-body ">
+                        <div class="event-body-info ">
+                            <p class="date "></p>
+                            <p class="category-assistants "></p>
+                        </div>
+                        <div class="event-body-control ">
+                            <button type="button " class="btn btn-primary "><i class="fas fa-star "></i> Me Interesa</button>
+                            <button type="button " class="btn btn-primary "><i class="far fa-eye "></i> Ver Más</button>
+                        </div>
+                    </div>
+                    <div class="desc ">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce facilisis fringilla laoreet. Mauris mattis enim ut felis consectetur, vitae lacinia enim auctor. Aenean vitae fermentum odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum non orci ut dignissim. Fusce fermentum felis aliquam, mattis nibh ut, faucibus leo. Sed lectus libero, volutpat at eros quis, venenatis tempus neque. Nulla vel .</p>
+                    </div>
+                </div>
+            </div>
+    </template>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+
+
+
+        $(document).ready(function(){
+
+            $(window).scroll(function(){
+
+                var firstResult = $('#firstResult').val();
+                var total = $('#total').val();
+                if(parseInt(firstResult) < parseInt(total)) {
+                    var position = $(window).scrollTop();
+                    var bottom = $(document).height() - $(window).height();
+
+                    if (position == bottom) {
+                        LoadEvents();
+                    }
+                }
+            });
+
+        });
+
+
+
+        function LoadEvents()
+        {
+            var firstResult = $('#firstResult').val();
+            var maxtResult = $('#maxResult').val();
+            $.ajax({
+                url: URL_EVENTSOFT + '/event/load',
+                type: "POST",
+                data: {"firstResult":firstResult, 'maxtResult': maxtResult },
+                success: function (data) {
+                    $('#firstResult').val( parseInt(firstResult) + parseInt(maxtResult) );
+                    $('#total').val(parseInt(data.total));
+                    console.log(data);
+                    for (i = 0; i < data.eventos.length; i++) {
+                        showEvent(data.eventos[i]);
+                    }
+                }
+            });
+        }
+
+        function showEvent(eventos) {
+
+            var title = document.createElement('div');
+            title.setAttribute('class', 'title');
+            title.innerHTML = `<h3>${eventos.name}</h3>`;
+
+            var img = document.createElement('img');
+            img.src = `{{ asset(varGlobImgEvents) }}${eventos.coverImage}`;
+            img.height = 100;
+            img.setAttribute('class', 'photothumb');
+
+            var event_body = document.createElement('div');
+            event_body.className = 'event-body';
+
+            var monthNames = [
+                "Enero", "Febrero", "Marzo",
+                "Abril", "Mayo", "Junio", "Julio",
+                "Agosto", "Septiembre", "Octubre",
+                "Noviembre", "Diciembre"
+            ];
+            var date_object = new Date(eventos.startDate.date);
+            var date = document.createElement('p'), assist = document.createElement('p');
+            date.className = 'date';
+            date.innerText = date_object.getDate() + " " + monthNames[date_object.getMonth()] + " " + date_object.getFullYear();//eventos.startDate.date;
+            assist.className = 'category-assistants';
+            assist.innerText = '128';
+
+            var event_body_info = document.createElement('div');
+            event_body_info.className = 'event-body-info';
+            event_body_info.appendChild(date);
+            event_body_info.appendChild(assist);
+
+            var me_interesa = document.createElement('button'), asistire = document.createElement('button');
+            me_interesa.type = 'button';
+            me_interesa.className = 'btn btn-primary';
+            me_interesa.style.marginRight = '5px';
+            me_interesa.innerHTML = '<i class="fas fa-star "></i> Me Interesa';
+
+            asistire.type = 'button';
+            asistire.className = 'btn btn-primary';
+            asistire.innerHTML = '<i class="far fa-eye "></i> Ver Más';
+
+            var event_body_control = document.createElement('div');
+            event_body_control.className = 'event-body-control';
+            event_body_control.appendChild(me_interesa);
+            event_body_control.appendChild(asistire);
+
+            event_body.appendChild(event_body_info);
+            event_body.appendChild(event_body_control);
+
+            //var descr = document.createElement('div');
+            //descr.className = 'desc';
+            //descr.innerHTML = '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce facilisis fringilla laoreet. Mauris mattis enim ut felis consectetur, vitae lacinia enim auctor. Aenean vitae fermentum odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum non orci ut dignissim. Fusce fermentum felis aliquam, mattis nibh ut, faucibus leo. Sed lectus libero, volutpat at eros quis, venenatis tempus neque. Nulla vel .</p>'
+
+            var content = document.createElement('div');
+            content.setAttribute('class', 'content');
+            content.appendChild(title);
+            content.appendChild(img);
+            content.appendChild(event_body);
+            //content.appendChild(descr);
+
+
+
+            var item = document.createElement('div');
+            item.setAttribute('class', 'item photo');
+
+
+            item.appendChild(content);
+            var grid = document.querySelector("#result");
+            grid.appendChild(item);
+
+            //resizeAllGridItems();
+        }
+        LoadEvents();
+    </script>
 {% endblock %}

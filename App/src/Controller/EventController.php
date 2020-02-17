@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Event;
 use App\Form\EventCreateType;
+use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,14 +17,22 @@ class EventController extends AbstractController
      */
     public function index()
     {
-
         $repo = $this->getDoctrine()->getRepository(Event::class);
-        $res = $repo->findAll();
-
+        $result = $repo->findEventPublishes();
         return $this->render('event/index.html.twig', [
             'controller_name' => 'EventController',
-            'eventos' => $res
+            'events' => $result
         ]);
+    }
+
+    public function getEvents(Request $request){
+        $_FIRSTRESULT    = $request->get("firstResult", null);
+        $_MAXTRESULT    = $request->get("maxtResult", null);
+
+        $repo = $this->getDoctrine()->getRepository(Event::class);
+        $result = $repo->findEventPublishes($_FIRSTRESULT,$_MAXTRESULT);
+
+        return new JsonResponse($result,200);
     }
 
     public function create(Request $request)
@@ -70,4 +80,5 @@ class EventController extends AbstractController
             "form_register" => $FRM_REGISTER->createView(),
         ]);
     }
+
 }

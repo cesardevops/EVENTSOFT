@@ -332,12 +332,30 @@ input:checked+.slider:before {
 /*---------- CARDS LAYOUT ---------- */
 
 .grid-events {
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-auto-rows: 28px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1em;
+    //display: grid;
+    //grid-gap: 10px;
+    //grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    //grid-auto-rows: 28px;
+}
+@media (max-width: 1200px ){
+  .grid-events {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 1000px ){
+  .grid-events {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
+@media (max-width: 800px ){
+  .grid-events {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
 .item {
     background-image: var(--bg-i-card-item);
     border-radius: 3px;
@@ -352,9 +370,9 @@ input:checked+.slider:before {
 }
 
 .title h3 {
-    font-size: 1.2em;
+    /*font-size: 1.2em;*/
     color: #ffffff;
-    text-transform: uppercase;
+    text-transform: capitalize;
 }
 
 .project .title {
@@ -433,11 +451,13 @@ input:checked+.slider:before {
 
 .event-body-create-event main {
   padding: 1em;
+  grid-column: 1 / span 3;
+  border: 1px solid var(--border-one);
 }
 .event-body-create-event form > div> div> label{
   margin-top: 15px;
 }
-.event-edit-profile-body main, .event-body-create-event main{
+.event-edit-profile-body main{
   grid-column: 1 / span 2;
   border: 1px solid var(--border-one);
 }
@@ -446,10 +466,10 @@ aside {
     border: 1px solid var(--border-one);
 }
 
-@media (max-width: 700px) {
+@media (max-width: 1024px) {
     main,
     aside {
-        grid-column: 1 / span 5;
+        grid-column: 1 / span 3 !important;
     }
 }
 
@@ -507,6 +527,7 @@ fieldset {
     margin-bottom: 5px;
     font-weight: 700;
   }
+
   input[type="search"] {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -552,17 +573,6 @@ fieldset {
     line-height: 1.42857143;
     color: #555555;
   }
-
-/*
-.form-control.focus,
-.form-control:focus,
-.form-select.focus,
-.form-select:focus {
-    border-color: var(--input-border-focus-primary);
-    outline: none;
-    box-shadow: var(--input-shadow-focus-primary);
-}
-*/
 
   .form-control {
     display: block;

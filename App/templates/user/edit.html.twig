@@ -94,80 +94,86 @@
 
         </main>
         <aside>
-            <div class="frm-event-general" style="display: grid;
+
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.css">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.js"></script>
+
+            <div class="frm-event-general" style="
                 margin: 0 auto 0 auto;
                 width: 100%;
                 padding: 1em;
                 padding-bottom: 60px;">
 
-                <div class="form-group" style="
-                    grid-column: 1 / span 2;
-                ">
+                <div class="form-group">
                     <h1>Mi Foto <i class="fas fa-expand"></i></h1>
-                    <label class="btn btn-big  btn-block required" style="padding: 0 20px;width: 100%;text-align: center;" for="user_photo_cover_coverprofile">Subir una Foto</label>
+                    <form method="post">
+                        <div id="upload-image"></div>
+                        <label for="photo_user" class="btn btn-big">
+                            Seleccionar Foto <i class="far fa-image"></i>
+                        </label>
+                        <input type="file" name="photo_user" id="photo_user" required="required" class="sr-only" accept="image/*"  >
+                        <button class="btn btn-primary btn-big cropped_image">Upload Image <i class="fas fa-cloud-upload-alt"></i></button>
 
-                    <input type="file" id="user_photo_cover_coverprofile" name="user_photo_cover[coverprofile]" required="required" accept="image/*" onchange="loadFile(event)" class="sr-only">
-                </div>
-
-                <div class="dropzone" style="
-                display: grid;
-                grid-gap: 1em;
-                grid-column: 1 /span 2;
-            ">
-                    <div class="image-wrapper" style="
-                    grid-column: 1 / span 2;
-                ">
-                        <img id="change-profile-pic" src="" height="300px">
-                    </div>
-
-                    <div class="priview-wraper" style="
-                    grid-column: 1 / span 2;
-                    overflow: hidden;
-                    position: relative;
-                    border-radius: 50%;
-                    height: 180px;
-                    width: 180px;
-                    margin: auto;
-                    border: 1px solid;
-                ">
-                        <div class="preview"></div>
-                    </div>
-                    <p style="grid-column: 1 / span 2;font-size: 14px;text-align: center;text-transform: uppercase;">previsualización</p>
-
-
-                    <input type="button" class="btn btn-big" style="grid-column: 1;grid-row: 2;" value="Cancelar">
-                    <button type="submit" value="Guardar" class="btn btn-primary btn-big" id="save-profile" style="
-                    grid-column: 2;
-                    grid-row: 2;
-                ">Guardar</button>
+                    </form>
                 </div>
 
             </div>
 
+
+
         </aside>
     </div>
 
-<!--
-    <script >
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
+    {% if app.user.photo == 1 %}
+    {% else %}
+    {% endif %}
+{% endblock %}
 
-                reader.onload = function(e) {
-                    $('#avatar').attr('src', e.target.result);
-                }
+{% block javascripts %}
+    {{ parent() }}
+<script type="text/javascript">
+    $image_crop = $('#upload-image').croppie({
 
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
+        url: '{{asset(varGlobImgAvatars~app.user.coverprofile)}}',
+        enableExif: true,
+        viewport: {
+        width: 250,
+        height: 250,
+        type: 'circle'
+    },
+    boundary: {
+    width: 250,
+    height: 250,
+    }
+    });
+    $('#photo_user').on('change', function () {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $image_crop.croppie('bind', {
+        url: e.target.result
+        }).then(function(){
+        console.log('jQuery bind complete');
+        });
+    }
+        reader.readAsDataURL(this.files[0]);
+    });
 
-        /*
-        $("#user_photo_cover_coverprofile").change(function() {
-            readURL(this);
+        $('.cropped_image').on('click', function (ev) {
+            ev.preventDefault();
+            $image_crop.croppie('result', {
+                type: 'canvas',
+                size: 'viewport'
+            }).then(function (response) {
+                $.ajax({
+                    url: URL_EVENTSOFT + '/my-profile/photo-new',
+                    type: "POST",
+                    data: {"image":response},
+                    success: function (data) {
+                        $("#ev-avatar").attr("src",URL_PUBLIC+data.img);
+                    }
+                });
+            });
         });
 
-*/
-
-    </script> -->
-
+</script>
 {% endblock %}

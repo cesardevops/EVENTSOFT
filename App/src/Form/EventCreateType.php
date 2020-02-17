@@ -29,7 +29,7 @@ class EventCreateType extends AbstractType
                 'attr' => array(
                     'placeholder' => 'Título',
                     'class'=> 'form-control',
-                    'style'=> 'height:50px; margin-bottom:15px',
+                    //'style'=> 'height:50px; margin-bottom:15px',
                 )
             ))
             ->add('name', TextType::class, array(
@@ -38,7 +38,7 @@ class EventCreateType extends AbstractType
                 'attr' => array(
                     'placeholder' => 'Nombre',
                     'class'=> 'form-control',
-                    'style'=> 'height:50px; margin-bottom:15px',
+                    //'style'=> 'height:50px; margin-bottom:15px',
                 )
             ))
             ->add('description', CKEditorType::class, array(
@@ -66,7 +66,7 @@ class EventCreateType extends AbstractType
                 },
                 'attr' => array(
                     'class'=> 'form-control',
-                    'style'=> 'height:50px; margin-bottom:15px',
+                    'style'=> 'height:50px;',
                 )
             ))
             ->add('classification', EntityType::class, array(
@@ -79,13 +79,13 @@ class EventCreateType extends AbstractType
                 },
                 'attr' => array(
                     'class'=> 'form-control',
-                    'style'=> 'height:50px; margin-bottom:15px',
+                    'style'=> 'height:50px;',
                 )
             ))
             ->add('startDate', DateTimeType::class, array(
                 'block_name' => 'b_inicio',
                 'label' => 'Fecha y Hora de Inicio',
-                'attr' => ['class' => 'js-datepicker'],
+                'attr' => ['class' => 'ev-date-control'],
                 'placeholder' => [
                     'year' => 'Año', 'month' => 'Mes', 'day' => 'Día',
                     'hour' => 'Hora', 'minute' => 'Minuto', 'second' => 'Segundo',
@@ -93,20 +93,16 @@ class EventCreateType extends AbstractType
             ))
             ->add('duration', TimeType::class, array(
                 'label' => 'Duración',
-                'block_name' => 'b_duracion',
+                'block_name' => 'b_duration',
                 'placeholder' => [
                     'hour' => 'Horas', 'minute' => 'Minutos', 'second' => 'Segundos',
-                ],
-                'attr' => array(
-                    'style'=> 'margin-bottom:15px',
-                )
+                ]
 
             ))
 
             ->add('coverImage', FileType::class, array(
                 'label' => 'Portada',
                 'block_name' => 'b_cover',
-
             ))
             //->add('status')
             ->add('addressname', TextType::class, array(
@@ -115,22 +111,23 @@ class EventCreateType extends AbstractType
                 'attr' => array(
                     'placeholder' => 'Direccón del evento',
                     'class'=> 'form-control',
-                    'style'=> 'height:50px; margin-bottom:15px',
+                    //'style'=> 'height:50px; margin-bottom:15px',
                 )
             ))
             //->add('lat')
             //->add('long')
             ->add('wordskeys', TextType::class, array(
                 'label' => 'Etiquetas',
-                'block_name' => 'b_work',
+                'block_name' => 'b_wordskeys',
                 'attr' => array(
                     'placeholder' => 'Palabras clave',
                     'class'=> 'form-control',
-                    'style'=> 'height:50px; margin-bottom:15px',
+                    //'style'=> 'height:50px; margin-bottom:15px',
                 )
             ))
             ->add('showguestlist', CheckboxType::class,array(
-                'label' => 'Mostrar Lista de Participantes'
+                'label' => 'Mostrar Lista de Participantes',
+                'block_name' => 'b_showguestlist',
             ))
             //->add('interest')
 
@@ -139,7 +136,7 @@ class EventCreateType extends AbstractType
             ->add('Registrar', SubmitType::class, array(
                 "attr" => array(
                     "class" => "btn btn-primary btn-big",
-                    'style' => "grid-column: 2;"
+                    'style' => "grid-column: 2; width:200px;"
                 )
             ))
         ;
