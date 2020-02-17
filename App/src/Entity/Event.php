@@ -25,9 +25,9 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=45, nullable=false)
+     * @ORM\Column(name="shortdescription", type="text", length=0, nullable=false)
      */
-    private $name;
+    private $shortdescription;
 
     /**
      * @var DateTime
@@ -67,7 +67,7 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="thumb", type="string", length=100, nullable=true)
+     * @ORM\Column(name="thumb", type="text", length=0, nullable=true)
      */
     private $thumb;
 
@@ -155,14 +155,14 @@ class Event
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getShortDescription(): ?string
     {
-        return $this->name;
+        return $this->shortdescription;
     }
 
-    public function setName(string $name): self
+    public function setShortDescription(string $name): self
     {
-        $this->name = $name;
+        $this->shortdescription = $name;
 
         return $this;
     }

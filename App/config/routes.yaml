@@ -30,6 +30,11 @@ events:
     controller: App\Controller\EventController::getEvents
     methods:    POST
 
+get_event:
+    path: /event/detail/{id}
+    controller: App\Controller\EventController::getEvent
+    methods: GET
+
 event_create:
     path: /event/create
     controller: App\Controller\EventController::create

@@ -6,6 +6,7 @@ use App\Entity\Event;
 use App\Form\EventCreateType;
 use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,6 +24,13 @@ class EventController extends AbstractController
             'controller_name' => 'EventController',
             'events' => $result
         ]);
+    }
+
+    public function getEvent(Request $request){
+
+        var_dump($request);
+        die();
+
     }
 
     public function getEvents(Request $request){
@@ -56,6 +64,19 @@ class EventController extends AbstractController
                     $this->getParameter('imgEvents'),
                     $newFilename
                 );
+                // create the thumb image
+                $_PHOTOBLOOB = $event->getThumb();
+                $thumb_name = 'thumb-ev-images-'.uniqid().uniqid().'.jpg';
+                $filesystem = new Filesystem();
+                $filesystem->touch('images/users/avatars/'.$thumb_name);
+                $in = fopen($_PHOTOBLOOB, "rb");
+                $out = fopen('images/events/covers/'.$thumb_name, "wb");
+                while ($chunk = fread($in, 8192)) {
+                    fwrite($out, $chunk, 8192);
+                }
+                fclose($in);
+                fclose($out);
+                $event->setThumb($thumb_name);
                 $event->setCoverImage($newFilename);
             }else
             {
@@ -70,9 +91,7 @@ class EventController extends AbstractController
             $em->persist($event);
             $em->flush();
 
-            //return $this->redirectToRoute('proyectos_show', array('idProyecto' => $tableProyecto->getIdproyecto()));
-        }
-        else{
+            return $this->redirectToRoute('get_event', array('id' => $event->getId()));
         }
 
         return $this->render('event/create.html.twig', [

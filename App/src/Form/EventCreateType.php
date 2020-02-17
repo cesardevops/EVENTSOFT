@@ -12,7 +12,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,6 +25,9 @@ class EventCreateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('thumb',HiddenType::class, array(
+                'block_name' => 'b_blob',
+            ))
             ->add('title', TextType::class, array(
                 'label' => 'Título Del Evento',
                 'block_name' => 'b_title',
@@ -32,19 +37,19 @@ class EventCreateType extends AbstractType
                     //'style'=> 'height:50px; margin-bottom:15px',
                 )
             ))
-            ->add('name', TextType::class, array(
-                'label' => 'Nombre del Evento',
+            ->add('shortdescription', TextareaType::class, array(
+                'label' => 'Descripción Corta',
                 'block_name' => 'b_name',
                 'attr' => array(
-                    'placeholder' => 'Nombre',
+                    'placeholder' => 'Descripción Corta',
                     'class'=> 'form-control',
-                    //'style'=> 'height:50px; margin-bottom:15px',
+                    'style'=> 'height:150px;',
                 )
             ))
             ->add('description', CKEditorType::class, array(
                 'block_name' => 'b_des',
+                'label' => 'Descripción Completa',
                 'attr' => array(
-                    'placeholder' => 'Nombre Del Evento',
                     'class'=> 'form-control',
                     'style'=> 'margin-bottom:15px',
                 ),

@@ -88,10 +88,15 @@
             title.setAttribute('class', 'title');
             title.innerHTML = `<h3>${eventos.name}</h3>`;
 
+            var div_img = document.createElement('div');
+            div_img.className= 'img-thumb';
+
             var img = document.createElement('img');
-            img.src = `{{ asset(varGlobImgEvents) }}${eventos.coverImage}`;
-            img.height = 100;
+            img.src = `{{ asset(varGlobImgEvents) }}${eventos.thumb}`;
+            //img.height = 100;
             img.setAttribute('class', 'photothumb');
+
+            div_img.appendChild(img);
 
             var event_body = document.createElement('div');
             event_body.className = 'event-body';
@@ -132,16 +137,17 @@
             event_body.appendChild(event_body_info);
             event_body.appendChild(event_body_control);
 
-            //var descr = document.createElement('div');
-            //descr.className = 'desc';
-            //descr.innerHTML = '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce facilisis fringilla laoreet. Mauris mattis enim ut felis consectetur, vitae lacinia enim auctor. Aenean vitae fermentum odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum non orci ut dignissim. Fusce fermentum felis aliquam, mattis nibh ut, faucibus leo. Sed lectus libero, volutpat at eros quis, venenatis tempus neque. Nulla vel .</p>'
+            var descr = document.createElement('div');
+            descr.className = 'desc';
+            descr.innerHTML = '<p>Lorem ipsum dolor sit ibus leo. Sed lectus libero, volutpat at eros quis, venenatis tempus neque. Nulla vel .</p>'
 
             var content = document.createElement('div');
             content.setAttribute('class', 'content');
-            content.appendChild(title);
+            //content.appendChild(div_img);
             content.appendChild(img);
+            content.appendChild(title);
             content.appendChild(event_body);
-            //content.appendChild(descr);
+            content.appendChild(descr);
 
 
 
