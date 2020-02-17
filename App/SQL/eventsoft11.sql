@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 17-02-2020 a las 12:41:51
+-- Tiempo de generación: 17-02-2020 a las 20:29:34
 -- Versión del servidor: 5.7.26
 -- Versión de PHP: 7.2.18
 
@@ -109,7 +109,7 @@ INSERT INTO `classification` (`id`, `name`) VALUES
 DROP TABLE IF EXISTS `event`;
 CREATE TABLE IF NOT EXISTS `event` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
+  `shortdescription` varchar(254) NOT NULL,
   `start_date` datetime NOT NULL,
   `duration` time NOT NULL,
   `description` longtext NOT NULL,
@@ -130,13 +130,13 @@ CREATE TABLE IF NOT EXISTS `event` (
   KEY `fk_event_user1_idx` (`user_id`),
   KEY `fk_event_categorie1_idx` (`categorie_id`),
   KEY `fk_event_classification1_idx` (`classification_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `event`
 --
 
-INSERT INTO `event` (`id`, `name`, `start_date`, `duration`, `description`, `title`, `cover_image`, `thumb`, `status`, `user_id`, `addressname`, `lat`, `longt`, `categorie_id`, `wordskeys`, `classification_id`, `showguestlist`, `interest`) VALUES
+INSERT INTO `event` (`id`, `shortdescription`, `start_date`, `duration`, `description`, `title`, `cover_image`, `thumb`, `status`, `user_id`, `addressname`, `lat`, `longt`, `categorie_id`, `wordskeys`, `classification_id`, `showguestlist`, `interest`) VALUES
 (2, 'la factoria', '2017-02-03 03:06:00', '17:16:00', '<p>adsdfdsf</p>', 'Conciert', '5f7e71afe860c7118afe058d25c8812f-5e46f9496faa7.jpeg', NULL, NULL, 12, 'sdfdf', NULL, NULL, 16, 'sdfdsfsdfsdfsd', 1, 1, 0),
 (3, 'la factoria', '2017-02-03 03:06:00', '17:16:00', '<p>adsdfdsf</p>', 'Conciert', '6b322b83696b0815cb6010bff8220070-5e46f959382e9.jpeg', NULL, NULL, 12, 'sdfdf', NULL, NULL, 16, 'sdfdsfsdfsdfsd', 1, 1, 0),
 (4, 'Nombre del evento', '2020-02-16 17:00:00', '01:10:00', '<h2 style=\"font-style:italic\"><span style=\"font-size:18px\"><span style=\"font-family:Comic Sans MS,cursive\"><span style=\"color:#2ecc71\"><strong><span style=\"background-color:#000000\">Lorem ipsum dolor sit amet</span></strong></span></span></span></h2>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-family:Comic Sans MS,cursive\">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae sapien pellentesque habitant morbi. Laoreet id donec ultrices tincidunt arcu non sodales. Felis eget velit aliquet sagittis id consectetur purus ut faucibus. Ut enim blandit volutpat maecenas volutpat. Eget est lorem ipsum dolor sit amet. A pellentesque sit amet porttitor. Enim praesent elementum facilisis leo vel fringilla est ullamcorper. Eu ultrices vitae auctor eu augue ut lectus. Facilisis volutpat est velit egestas. Tempus egestas sed sed risus pretium. Velit sed ullamcorper morbi tincidunt ornare massa. Arcu non sodales neque sodales ut. Risus in hendrerit gravida rutrum quisque non tellus. Pharetra diam sit amet nisl suscipit adipiscing. Mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Nibh venenatis cras sed felis eget velit aliquet sagittis id. Eget mauris pharetra et ultrices neque</span>.<br />\r\n&nbsp;</p>\r\n\r\n<p style=\"text-align:justify\"><img alt=\"Image Bunny\" src=\"https://loremflickr.com/640/360\" style=\"border-style:solid; border-width:1px; float:right; height:225px; width:400px\" /></p>', 'Evento nuevo', '5f7e71afe860c7118afe058d25c8812f-5e498f694bf36.jpeg', NULL, NULL, 12, 'Av siempre viva 123 SpringField', NULL, NULL, 23, 'EventSoft, Cats, Aventura', 1, 1, 0),
@@ -148,7 +148,10 @@ INSERT INTO `event` (`id`, `name`, `start_date`, `duration`, `description`, `tit
 (10, 'gdfgdfgdfgdfgdf', '2020-03-18 21:00:00', '02:00:00', '<pre>\r\n<code>https://loremflickr.com/640/360</code></pre>', 'concierto rock', 'www-5e4a20f98c8cb.jpeg', NULL, NULL, 12, 'Av siempre viva 123 SpringField', NULL, NULL, 1, 'EventSoft, Cats, Aventura', 1, 1, 0),
 (11, 'gdfgdfgdfgdfgdf', '2020-03-18 21:00:00', '02:00:00', '<pre>\r\n<code>https://loremflickr.com/640/360</code></pre>', 'concierto rock', 'www-5e4a2954ad27a.jpeg', NULL, NULL, 12, 'Av siempre viva 123 SpringField', NULL, NULL, 1, 'EventSoft, Cats, Aventura', 1, 1, 0),
 (12, 'gdfgdfgdfgdfgdf', '2020-03-18 21:00:00', '02:00:00', '<pre>\r\n<code>https://loremflickr.com/640/360</code></pre>', 'concierto rock', 'www-5e4a2967d6759.jpeg', NULL, NULL, 12, 'Av siempre viva 123 SpringField', NULL, NULL, 1, 'EventSoft, Cats, Aventura', 1, 1, 0),
-(13, 'gdfgdfgdfgdfgdf', '2020-03-18 21:00:00', '02:00:00', '<pre>\r\n<code>https://loremflickr.com/640/360</code></pre>', 'concierto rock', 'www-5e4a29f65fbac.jpeg', NULL, NULL, 12, 'Av siempre viva 123 SpringField', NULL, NULL, 1, 'EventSoft, Cats, Aventura', 1, 1, 0);
+(13, 'gdfgdfgdfgdfgdf', '2020-03-18 21:00:00', '02:00:00', '<pre>\r\n<code>https://loremflickr.com/640/360</code></pre>', 'concierto rock', 'www-5e4a29f65fbac.jpeg', NULL, NULL, 12, 'Av siempre viva 123 SpringField', NULL, NULL, 1, 'EventSoft, Cats, Aventura', 1, 1, 0),
+(14, 'MAC', '2020-03-18 10:00:00', '02:30:00', '<p><strong>Lorem ipsum dolor sit amet</strong></p>\r\n\r\n<p style=\"margin-left:40px\"><a href=\"https://www.google.com.\" target=\"_blank\">Consectetur adipiscing elit</a>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eget nunc lobortis mattis aliquam faucibus purus. Enim nunc faucibus a pellentesque sit amet porttitor eget. Nibh sit amet commodo nulla facilisi nullam. Congue mauris rhoncus aenean vel. Ac orci phasellus egestas tellus rutrum. Tristique nulla aliquet enim tortor at auctor urna nunc. Pellentesque pulvinar pellentesque habitant morbi tristique senectus et netus. Laoreet non curabitur gravida arcu ac tortor dignissim convallis aenean. Dolor magna eget est lorem ipsum dolor sit. Pulvinar proin gravida hendrerit lectus. Ipsum consequat nisl vel pretium lectus quam id leo. Sit amet mauris commodo quis imperdiet massa tincidunt. Amet mauris commodo quis imperdiet massa. Curabitur gravida arcu ac tortor dignissim convallis aenean. Cursus in hac habitasse platea dictumst quisque sagittis purus sit. Lacus viverra vitae congue eu consequat ac felis donec et. Eget aliquet nibh praesent tristique magna. Dolor sit amet consectetur adipiscing.</p>\r\n\r\n<p>&nbsp;</p>', 'Exposicion d earte', 'herographicfreeimg1-5e4a8ce6bcdcd.png', NULL, NULL, 12, 'Av siempre viva 123 SpringField', NULL, NULL, 16, 'EventSoft, Cats, Aventura', 1, 1, 0),
+(15, 'Lady GAGA', '2020-06-08 04:00:00', '03:00:00', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eget nunc lobortis mattis aliquam faucibus purus. Enim nunc faucibus a pellentesque sit amet porttitor eget. Nibh sit amet commodo nulla facilisi nullam. Congue mauris rhoncus aenean vel. Ac orci phasellus egestas tellus rutrum. Tristique nulla aliquet enim tortor at auctor urna nunc. Pellentesque pulvinar pellentesque habitant morbi tristique senectus et netus. Laoreet non curabitur gravida arcu ac tortor dignissim convallis aenean. Dolor magna eget est lorem ipsum dolor sit. Pulvinar proin gravida hendrerit lectus. Ipsum consequat nisl vel pretium lectus quam id leo. Sit amet mauris commodo quis imperdiet massa tincidunt. Amet mauris commodo quis imperdiet massa. Curabitur gravida arcu ac tortor dignissim convallis aenean. Cursus in hac habitasse platea dictumst quisque sagittis purus sit. Lacus viverra vitae congue eu consequat ac felis donec et. Eget aliquet nibh praesent tristique magna. Dolor sit amet consectetur adipiscing.</p>', 'Exposicion Musical', '20180923_5ba7e93146fab-5e4a92a660c57.jpeg', NULL, NULL, 12, 'Av siempre viva 123 SpringField', NULL, NULL, 16, 'EventSoft, Cats, Aventura', 1, 1, 0),
+(16, 'asdasdas', '2015-02-03 01:02:00', '12:15:00', '<ul>\r\n	<li><strong>asdasdasdasdasda</strong></li>\r\n</ul>\r\n\r\n<p><strong>asd</strong></p>\r\n\r\n<p><strong>asd</strong></p>', 'Conciert asdas', '84730848_2670135076375386_6630667616480395264_n-5e4af6a7b0f4d.png', 'thumb-ev-images-5e4af6a7b9eb15e4af6a7b9eb4.jpg', NULL, 12, 'Av siempre viva 123 SpringField', NULL, NULL, 16, 'EventSoft, Cats, Aventura', 1, 1, 0);
 
 -- --------------------------------------------------------
 
