@@ -358,7 +358,8 @@ input:checked+.slider:before {
 }
 .item {
     background-image: var(--bg-i-card-item);
-    border-radius: 3px;
+    border-radius: 20px;
+  overflow: hidden;
     animation: enter 400ms cubic-bezier(.5, 0, .2, 1) both;
     @for $i from 1 through 10 {
       &:nth-child(#{$i}) {
@@ -396,7 +397,8 @@ input:checked+.slider:before {
 }
 
 .photo .title {
-    background-color: #f44336;
+  background: linear-gradient(to top, #4481eb 0%, #04befe 100%);
+   /* background-color: #3b20d3;/*#f44336;*/
 }
 
 .project {
@@ -408,7 +410,7 @@ input:checked+.slider:before {
 }
 
 .photo {
-    border: 1px solid #f44336;
+    border: 1px solid #4481eb;
 }
 
 .desc,

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 15-02-2020 a las 13:26:26
+-- Tiempo de generación: 17-02-2020 a las 12:41:51
 -- Versión del servidor: 5.7.26
 -- Versión de PHP: 7.2.18
 
@@ -115,6 +115,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   `description` longtext NOT NULL,
   `title` varchar(100) NOT NULL,
   `cover_image` varchar(255) DEFAULT NULL,
+  `thumb` varchar(100) DEFAULT NULL,
   `status` tinyint(1) DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   `addressname` varchar(100) DEFAULT NULL,
@@ -129,16 +130,25 @@ CREATE TABLE IF NOT EXISTS `event` (
   KEY `fk_event_user1_idx` (`user_id`),
   KEY `fk_event_categorie1_idx` (`categorie_id`),
   KEY `fk_event_classification1_idx` (`classification_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `event`
 --
 
-INSERT INTO `event` (`id`, `name`, `start_date`, `duration`, `description`, `title`, `cover_image`, `status`, `user_id`, `addressname`, `lat`, `longt`, `categorie_id`, `wordskeys`, `classification_id`, `showguestlist`, `interest`) VALUES
-(1, 'evento 1', '2020-02-14 00:00:00', '10:00:00', 'sdfsdfsdfsdfsdfds', 'itulo', '', 1, 12, 'asdfasdfsadfdsf', NULL, NULL, 7, 'dsfsdfsdfds,sdf,sd,f,dsf,sdfds,f,ds,fds', 1, 1, 0),
-(2, 'la factoria', '2017-02-03 03:06:00', '17:16:00', '<p>adsdfdsf</p>', 'Conciert', '5f7e71afe860c7118afe058d25c8812f-5e46f9496faa7.jpeg', NULL, 12, 'sdfdf', NULL, NULL, 16, 'sdfdsfsdfsdfsd', 1, 1, 0),
-(3, 'la factoria', '2017-02-03 03:06:00', '17:16:00', '<p>adsdfdsf</p>', 'Conciert', '6b322b83696b0815cb6010bff8220070-5e46f959382e9.jpeg', NULL, 12, 'sdfdf', NULL, NULL, 16, 'sdfdsfsdfsdfsd', 1, 1, 0);
+INSERT INTO `event` (`id`, `name`, `start_date`, `duration`, `description`, `title`, `cover_image`, `thumb`, `status`, `user_id`, `addressname`, `lat`, `longt`, `categorie_id`, `wordskeys`, `classification_id`, `showguestlist`, `interest`) VALUES
+(2, 'la factoria', '2017-02-03 03:06:00', '17:16:00', '<p>adsdfdsf</p>', 'Conciert', '5f7e71afe860c7118afe058d25c8812f-5e46f9496faa7.jpeg', NULL, NULL, 12, 'sdfdf', NULL, NULL, 16, 'sdfdsfsdfsdfsd', 1, 1, 0),
+(3, 'la factoria', '2017-02-03 03:06:00', '17:16:00', '<p>adsdfdsf</p>', 'Conciert', '6b322b83696b0815cb6010bff8220070-5e46f959382e9.jpeg', NULL, NULL, 12, 'sdfdf', NULL, NULL, 16, 'sdfdsfsdfsdfsd', 1, 1, 0),
+(4, 'Nombre del evento', '2020-02-16 17:00:00', '01:10:00', '<h2 style=\"font-style:italic\"><span style=\"font-size:18px\"><span style=\"font-family:Comic Sans MS,cursive\"><span style=\"color:#2ecc71\"><strong><span style=\"background-color:#000000\">Lorem ipsum dolor sit amet</span></strong></span></span></span></h2>\r\n\r\n<p style=\"text-align:justify\"><span style=\"font-family:Comic Sans MS,cursive\">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae sapien pellentesque habitant morbi. Laoreet id donec ultrices tincidunt arcu non sodales. Felis eget velit aliquet sagittis id consectetur purus ut faucibus. Ut enim blandit volutpat maecenas volutpat. Eget est lorem ipsum dolor sit amet. A pellentesque sit amet porttitor. Enim praesent elementum facilisis leo vel fringilla est ullamcorper. Eu ultrices vitae auctor eu augue ut lectus. Facilisis volutpat est velit egestas. Tempus egestas sed sed risus pretium. Velit sed ullamcorper morbi tincidunt ornare massa. Arcu non sodales neque sodales ut. Risus in hendrerit gravida rutrum quisque non tellus. Pharetra diam sit amet nisl suscipit adipiscing. Mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Nibh venenatis cras sed felis eget velit aliquet sagittis id. Eget mauris pharetra et ultrices neque</span>.<br />\r\n&nbsp;</p>\r\n\r\n<p style=\"text-align:justify\"><img alt=\"Image Bunny\" src=\"https://loremflickr.com/640/360\" style=\"border-style:solid; border-width:1px; float:right; height:225px; width:400px\" /></p>', 'Evento nuevo', '5f7e71afe860c7118afe058d25c8812f-5e498f694bf36.jpeg', NULL, NULL, 12, 'Av siempre viva 123 SpringField', NULL, NULL, 23, 'EventSoft, Cats, Aventura', 1, 1, 0),
+(5, 'marcis wit', '2020-03-18 21:00:00', '02:00:00', '<pre>\r\n<code>https://loremflickr.com/640/360</code></pre>', 'concierto cristiano', 'aaqhwsv-5e4a17fcbf1a1.jpeg', NULL, NULL, 12, 'Av siempre viva 123 SpringField', NULL, NULL, 1, 'EventSoft, Cats, Aventura', 1, 1, 0),
+(6, 'marcis wit', '2020-03-18 21:00:00', '02:00:00', '<pre>\r\n<code>https://loremflickr.com/640/360</code></pre>', 'concierto rock', '1920x1080-5e4a181276bd5.png', NULL, NULL, 12, 'Av siempre viva 123 SpringField', NULL, NULL, 1, 'EventSoft, Cats, Aventura', 1, 1, 0),
+(7, 'gdfgdfgdfgdfgdf', '2020-03-18 21:00:00', '02:00:00', '<pre>\r\n<code>https://loremflickr.com/640/360</code></pre>', 'concierto rockerggdfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfg', '20180923_5ba7e93146fab-5e4a181d4591e.jpeg', NULL, NULL, 12, 'Av siempre viva 123 SpringField', NULL, NULL, 1, 'EventSoft, Cats, Aventura', 1, 1, 0),
+(8, 'gdfgdfgdfgdfgdf', '2020-03-18 21:00:00', '02:00:00', '<pre>\r\n<code>https://loremflickr.com/640/360</code></pre>', 'concierto rock', 'mchgrouplivemarketingaktivierung-5e4a18b76283f.jpeg', NULL, NULL, 12, 'Av siempre viva 123 SpringField', NULL, NULL, 1, 'EventSoft, Cats, Aventura', 1, 1, 0),
+(9, 'gdfgdfgdfgdfgdf', '2020-03-18 21:00:00', '02:00:00', '<pre>\r\n<code>https://loremflickr.com/640/360</code></pre>', 'concierto rock', 'destacatadaa624x317-5e4a18d730065.jpeg', NULL, NULL, 12, 'Av siempre viva 123 SpringField', NULL, NULL, 1, 'EventSoft, Cats, Aventura', 1, 1, 0),
+(10, 'gdfgdfgdfgdfgdf', '2020-03-18 21:00:00', '02:00:00', '<pre>\r\n<code>https://loremflickr.com/640/360</code></pre>', 'concierto rock', 'www-5e4a20f98c8cb.jpeg', NULL, NULL, 12, 'Av siempre viva 123 SpringField', NULL, NULL, 1, 'EventSoft, Cats, Aventura', 1, 1, 0),
+(11, 'gdfgdfgdfgdfgdf', '2020-03-18 21:00:00', '02:00:00', '<pre>\r\n<code>https://loremflickr.com/640/360</code></pre>', 'concierto rock', 'www-5e4a2954ad27a.jpeg', NULL, NULL, 12, 'Av siempre viva 123 SpringField', NULL, NULL, 1, 'EventSoft, Cats, Aventura', 1, 1, 0),
+(12, 'gdfgdfgdfgdfgdf', '2020-03-18 21:00:00', '02:00:00', '<pre>\r\n<code>https://loremflickr.com/640/360</code></pre>', 'concierto rock', 'www-5e4a2967d6759.jpeg', NULL, NULL, 12, 'Av siempre viva 123 SpringField', NULL, NULL, 1, 'EventSoft, Cats, Aventura', 1, 1, 0),
+(13, 'gdfgdfgdfgdfgdf', '2020-03-18 21:00:00', '02:00:00', '<pre>\r\n<code>https://loremflickr.com/640/360</code></pre>', 'concierto rock', 'www-5e4a29f65fbac.jpeg', NULL, NULL, 12, 'Av siempre viva 123 SpringField', NULL, NULL, 1, 'EventSoft, Cats, Aventura', 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -300,7 +310,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `password`, `roles`, `online`, `created_at`, `updated_at`, `name`, `surname`, `phone`, `address`, `gender`, `birthday`, `company`, `companyid`, `description`, `coverimage`, `coverprofile`, `photo`, `timezone`) VALUES
-(12, 'cesar.freitas.dev@gmail.com', '$2y$04$DS4p53BVOM8RbcqDCkCZZOiOaNx.87SYFKwgeoXNVGfnbGr4jCozm', '\"ROLE_USER\"', NULL, '2020-02-11 00:33:55', '2020-02-11 00:33:55', 'Cesar', 'Freitas', '950896817', NULL, '1', '1900-01-01 00:00:00', '', '73095092', 'hellow', NULL, '5e423cc337a11.jpg', '1', 'America/New_York'),
+(12, 'cesar.freitas.dev@gmail.com', '$2y$04$DS4p53BVOM8RbcqDCkCZZOiOaNx.87SYFKwgeoXNVGfnbGr4jCozm', '\"ROLE_USER\"', NULL, '2020-02-11 00:33:55', '2020-02-11 00:33:55', 'Cesar', 'Freitas', '950896817', NULL, '1', '1900-01-01 00:00:00', '', '73095092', 'hellow', NULL, 'ev-db-images-5e4995a2a576f5e4995a2a5773.jpg', '1', 'America/New_York'),
 (14, 'novia.hermosa@gmail.com', '$2y$04$2CtYNWl9H.bdB57SZKFCaODUQHr7ieP4Ef4g7OE05.N9cLzBregwS', '\"ROLE_USER\"', NULL, '2020-02-11 20:46:59', '2020-02-11 20:46:59', 'Isabel Fiorella', 'Llallico Quispe', '960737473', NULL, '0', '1997-05-12 00:00:00', NULL, NULL, NULL, NULL, '5e435913039e9.jpg', '1', 'America/New_York');
 
 -- --------------------------------------------------------

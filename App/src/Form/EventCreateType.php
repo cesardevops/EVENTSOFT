@@ -49,11 +49,9 @@ class EventCreateType extends AbstractType
                     'style'=> 'margin-bottom:15px',
                 ),
                 'config' => array(
-                    //'toolbar' => 'basic',
-                    'toolbar' => 'full',
+                    'toolbar' => 'basic',
+                    //'toolbar' => 'full',
                     'language' => 'es',
-                    'skin' => 'moono-lisa',
-                    //'uiColor' => '#000',
                 ),
             ))
             ->add('categorised', EntityType::class, array(
