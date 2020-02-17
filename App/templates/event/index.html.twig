@@ -69,7 +69,12 @@
             var img = document.createElement('img');
             if (eventos.thumb == null)
             {
-                img.src = 'https://dummyimage.com/400x250/fff/aaa';
+                if (localStorage.getItem('theme') === 'dark') {
+                    img.src = 'https://dummyimage.com/400x250/000/aaa';
+                } else {
+                    img.src = 'https://dummyimage.com/400x250/fff/aaa';
+                }
+
 
             }else{
                 img.src = `{{ asset(varGlobImgEvents) }}${eventos.thumb}`;
