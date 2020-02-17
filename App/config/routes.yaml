@@ -1,6 +1,21 @@
-index:
-    path:       /
-    controller: App\Controller\HomeController::index
+event:
+    path: /
+    controller: App\Controller\EventController::index
+
+events:
+    path: /event/load
+    controller: App\Controller\EventController::getEvents
+    methods:    POST
+
+get_event:
+    path: /event/detail/{id}
+    controller: App\Controller\EventController::getEvent
+    methods: GET
+
+event_create:
+    path: /event/create
+    controller: App\Controller\EventController::create
+
 prices:
     path:       /table-prices
     controller: App\Controller\HomeController::prices
@@ -20,24 +35,3 @@ upload_cover_profile:
     path:       /my-profile/photo-new
     controller: App\Controller\UserController::editphoto
     methods:    POST
-
-event:
-    path: /event
-    controller: App\Controller\EventController::index
-
-events:
-    path: /event/load
-    controller: App\Controller\EventController::getEvents
-    methods:    POST
-
-get_event:
-    path: /event/detail/{id}
-    controller: App\Controller\EventController::getEvent
-    methods: GET
-
-event_create:
-    path: /event/create
-    controller: App\Controller\EventController::create
-test:
-    path: /prueba
-    controller: App\Controller\UserController::saveImage

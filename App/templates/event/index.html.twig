@@ -3,50 +3,31 @@
 {% block title %}Hello EventController!{% endblock %}
 
 {% block body %}
-
     <input type="hidden" id="firstResult" value="0">
     <input type="hidden" id="maxResult" value="10">
     <input type="hidden" id="total" value="10">
-    <div class="grid-events" id="result">
+
+    <div class="ev-body">
+        <div class="promo-three-months-premiun-free">
+            <div>
+                <h2>Prueba Premiun por tres meses gratis</h2>
+                <h3>Regístrate hasta el 21 de febrero y participa en increíbles sorteos.</h3>
+                <button type="submit" class="btn btn-big">Ver Planes</button>
+            </div>
+
+            <img src="{{ asset('assets/_img/girl_one.png') }}" alt="" srcset="">
+        </div>
     </div>
 
-
-    <!-- template -->
-    <template id="template-whit-img">
-            <div class="item photo">
-                <div class="content">
-                    <div class="title">
-                        <h3></h3>
-                    </div>
-                    <img class="photothumb" src="">
-                    <div class="event-body ">
-                        <div class="event-body-info ">
-                            <p class="date "></p>
-                            <p class="category-assistants "></p>
-                        </div>
-                        <div class="event-body-control ">
-                            <button type="button " class="btn btn-primary "><i class="fas fa-star "></i> Me Interesa</button>
-                            <button type="button " class="btn btn-primary "><i class="far fa-eye "></i> Ver Más</button>
-                        </div>
-                    </div>
-                    <div class="desc ">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce facilisis fringilla laoreet. Mauris mattis enim ut felis consectetur, vitae lacinia enim auctor. Aenean vitae fermentum odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum non orci ut dignissim. Fusce fermentum felis aliquam, mattis nibh ut, faucibus leo. Sed lectus libero, volutpat at eros quis, venenatis tempus neque. Nulla vel .</p>
-                    </div>
-                </div>
-            </div>
-    </template>
+    <div class="grid-events" id="result">
+    </div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
-
-
-
         $(document).ready(function(){
-
             $(window).scroll(function(){
-
                 var firstResult = $('#firstResult').val();
                 var total = $('#total').val();
                 if(parseInt(firstResult) < parseInt(total)) {
@@ -58,10 +39,7 @@
                     }
                 }
             });
-
         });
-
-
 
         function LoadEvents()
         {
@@ -86,21 +64,23 @@
 
             var title = document.createElement('div');
             title.setAttribute('class', 'title');
-            title.innerHTML = `<h3>${eventos.name}</h3>`;
-
+            title.innerHTML = `<h3><p>${eventos.title}</p></h3>`;
             var div_img = document.createElement('div');
             div_img.className= 'img-thumb';
-
             var img = document.createElement('img');
-            img.src = `{{ asset(varGlobImgEvents) }}${eventos.thumb}`;
+            console.log(eventos.thumb);
+            if (eventos.thumb == null)
+            {
+                img.src = 'https://dummyimage.com/400x250/fff/aaa';
+
+            }else{
+                img.src = `{{ asset(varGlobImgEvents) }}${eventos.thumb}`;
+            }
             //img.height = 100;
             img.setAttribute('class', 'photothumb');
-
             div_img.appendChild(img);
-
             var event_body = document.createElement('div');
             event_body.className = 'event-body';
-
             var monthNames = [
                 "Enero", "Febrero", "Marzo",
                 "Abril", "Mayo", "Junio", "Julio",
@@ -139,7 +119,7 @@
 
             var descr = document.createElement('div');
             descr.className = 'desc';
-            descr.innerHTML = '<p>Lorem ipsum dolor sit ibus leo. Sed lectus libero, volutpat at eros quis, venenatis tempus neque. Nulla vel .</p>'
+            descr.innerHTML = `<p>${eventos.shortdescription}</p>`;
 
             var content = document.createElement('div');
             content.setAttribute('class', 'content');
@@ -149,17 +129,11 @@
             content.appendChild(event_body);
             content.appendChild(descr);
 
-
-
             var item = document.createElement('div');
             item.setAttribute('class', 'item photo');
-
-
             item.appendChild(content);
             var grid = document.querySelector("#result");
             grid.appendChild(item);
-
-            //resizeAllGridItems();
         }
         LoadEvents();
     </script>

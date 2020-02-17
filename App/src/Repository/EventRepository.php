@@ -21,7 +21,7 @@ class EventRepository extends ServiceEntityRepository
 
         $total =  $query->execute();
 
-        $sql = "select e.id, e.shortdescription, e.startDate, e.thumb, e.duration from App:Event e";
+        $sql = "select e.id, e.title, e.shortdescription, e.startDate, e.thumb, e.duration from App:Event e";
         $result = $this->getEntityManager()->createQuery($sql)->setFirstResult($firstResult)->setMaxResults($maxResult)->getResult();
         //return $result;
 

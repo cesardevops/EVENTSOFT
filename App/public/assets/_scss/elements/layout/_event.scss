@@ -389,7 +389,7 @@ input:checked+.slider:before {
 }
 
 .title {
-    padding: 20px;
+    padding: 10px;
 }
 
 .title h3 {
@@ -1737,6 +1737,7 @@ a.ev-link:hover {
   background-image: linear-gradient(100deg,#f26798 0%,#3023ae 100%);
   display: grid;
   grid-template-columns: repeat(2, [col] 50%);
+  margin-bottom: 2em;
 }
 .promo-three-months-premiun-free h2 {
   font-size: 56px;
