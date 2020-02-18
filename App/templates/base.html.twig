@@ -32,20 +32,18 @@
 
         </div>
 
-        <form action="" method="POST">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search EventSoft">
+                <input type="text" class="form-control" id="ev-input-search" placeholder="Search EventSoft">
                 <span class="input-group-btn">
-                  <button class="btn btn-default" type="submit" style="height: 34px;"><i class="fa fa-search"></i></button>
+                  <button class="btn btn-default" id="ev-btn-search-events" type="submit" onclick="javascript:SearchEvent()" style="height: 34px;"><i class="fa fa-search"></i></button>
                 </span>
             </div><!-- /input-group -->
-        </form>
 
         <nav>
             <ul>
                 {% if app.user %}
-                    <li class="media-hidden"><a href="#">Mis Intereses</a></li>
-                    <li class="media-hidden"><a href="#">Eventos A Los Que Ire</a></li>
+                    <li class="media-hidden"><a href="{{ path('view_interest') }}">Mis Intereses</a></li>
+                    <li class="media-hidden"><a href="{{ path('whereiwillgo') }}">Eventos A Los Que Ire</a></li>
                     <li class="media-hidden"><a href="#">Mis Eventos</a></li>
                 {% else %}
                     <li class="media-hidden"><a href="{{ path('login') }}">Login</a></li>
@@ -170,6 +168,17 @@
             $menu_child.fadeToggle(100);
         });
 
+        var input_search = document.getElementById("ev-input-search");
+        input_search.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("ev-btn-search-events").click();
+            }
+        });
+
+        function SearchEvent() {
+            alert('buscar');
+        }
     </script>
 {% endblock %}
 

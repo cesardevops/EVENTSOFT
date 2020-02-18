@@ -1,30 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inicio{% endblock %}
+{% block title %}Mis Intereses{% endblock %}
 
 {% block body %}
-    <input type="text" id="firstResult" value="0">
-    <input type="text" id="maxResult" value="10">
-    <input type="text" id="total" value="10">
-
-    <div class="ev-body">
-        <div class="promo-three-months-premiun-free">
-            <div>
-                <h2>Prueba Premiun por tres meses gratis</h2>
-                <h3>Regístrate hasta el 21 de febrero y participa en increíbles sorteos.</h3>
-                <button type="submit" class="btn btn-big">Ver Planes</button>
-            </div>
-
-            <img src="{{ asset('assets/_img/girl_one.png') }}" alt="" srcset="">
-        </div>
-    </div>
+    <input type="hidden" id="firstResult" value="0">
+    <input type="hidden" id="maxResult" value="10">
+    <input type="hidden" id="total" value="10">
 
     <div class="grid-events" id="result">
     </div>
+
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
+{{ parent() }}
     <script type="text/javascript">
 
         $(document).ready(function(){
@@ -41,13 +30,16 @@
             });
         });
 
-        function setInterest(event) {
+        function setAssistant(event) {
             $.ajax({
-                url: URL_EVENTSOFT + '/event/plus/interest',
+                url: URL_EVENTSOFT + '/event/plus/assistant',
                 type: "POST",
-                data: {"id":$(event).data('event')},
+                data: {"id":$(event).data('event') },
                 success: function (data) {
-                    console.log(data);
+                    if(data.status == 'ok'){
+                        var el = document.getElementById('item'+$(event).data('event'));
+                        el.remove();
+                    }
                 }
             });
         }
@@ -56,7 +48,7 @@
             var firstResult = $('#firstResult').val();
             var maxtResult = $('#maxResult').val();
             $.ajax({
-                url: URL_EVENTSOFT + '/event/load',
+                url: URL_EVENTSOFT + '/event/myinterest/load',
                 type: "POST",
                 data: {"firstResult":firstResult, 'maxtResult': maxtResult },
                 success: function (data) {
@@ -112,9 +104,9 @@
             buttonElement.type = 'button';
             buttonElement.className = 'btn btn-primary btn-interest';
             buttonElement.style.marginRight = '5px';
-            buttonElement.setAttribute('data-event', eventos.id );
-            buttonElement.setAttribute('onclick', 'setInterest(this);' );
-            buttonElement.innerHTML = '<i class="fas fa-star "></i> Me Interesa';
+            buttonElement.setAttribute('data-event', eventos.userxevent );
+            buttonElement.setAttribute('onclick', 'setAssistant(this);' );
+            buttonElement.innerHTML = '<i class="fas fa-heart"></i> Asistir';
 
             asistire.type = 'button';
             asistire.className = 'btn btn-primary';
@@ -142,6 +134,7 @@
 
             var item = document.createElement('div');
             item.setAttribute('class', 'item photo');
+            item.setAttribute('id', 'item'+eventos.userxevent);
             item.style.animationDelay = style_animate;
             item.appendChild(content);
             var grid = document.querySelector("#result");
