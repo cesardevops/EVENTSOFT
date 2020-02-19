@@ -1,0 +1,198 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('assets/_style/cropper.css') }}" />
+    <script src="{{ asset('assets/_js/cropper.js') }}"></script>
+    <script src="{{ asset('assets/_js/cropimage.js') }}"></script>
+    <link rel="stylesheet" href="https://unpkg.com/js-datepicker/dist/datepicker.min.css">
+    <script src="https://unpkg.com/js-datepicker"></script>
+
+    <div class="event-body-create-event">
+        <main>
+            {{ form_start(form_register, {'attr': {'class': 'frm-event-general'}}) }}
+            <h1>Nuevo Evento <i class="far fa-calendar-plus"></i></h1>
+            {{ form_errors(form_register) }}
+
+            <label></label>
+            <div class="form-group">
+                {{ form_errors(form_register.thumb) }}
+                {{ form_widget(form_register.thumb) }}
+            </div>
+            {% block b_title %}
+                {{ form_label(form_register.title) }}
+                <div class="form-group">
+                    {{ form_errors(form_register.title) }}
+                    {{ form_widget(form_register.title) }}
+                </div>
+            {% endblock %}
+
+            {% block b_name %}
+                {{ form_label(form_register.shortdescription) }}
+                <div class="form-group">
+                    {{ form_errors(form_register.shortdescription) }}
+                    {{ form_widget(form_register.shortdescription, {'attr': {'maxlength':'200'}}) }}
+                </div>
+            {% endblock %}
+
+            {% block b_des %}
+                {{ form_label(form_register.description) }}
+                <div class="form-group">
+                    {{ form_errors(form_register.description) }}
+                    {{ form_widget(form_register.description) }}
+                </div>
+            {% endblock %}
+
+            {% block b_cat %}
+                {{ form_label(form_register.categorised) }}
+                <div class="form-group">
+                    {{ form_errors(form_register.categorised) }}
+                    {{ form_widget(form_register.categorised) }}
+                </div>
+            {% endblock %}
+
+            {% block b_cla %}
+                {{ form_label(form_register.classification) }}
+                <div class="form-group">
+                    {{ form_errors(form_register.classification) }}
+                    {{ form_widget(form_register.classification) }}
+                </div>
+            {% endblock %}
+
+            {% block b_inicio %}
+                {{ form_label(form_register.startDate) }}
+                <div class="form-group ev-date-control">
+                    {{ form_errors(form_register.startDate) }}
+                    {{ form_widget(form_register.startDate.date.day, {'attr': {'class': 'form-control', 'style' : 'height: 50px;'}}) }}
+                    {{ form_widget(form_register.startDate.date.month, {'attr': {'class': 'form-control', 'style' : 'height: 50px;'}}) }}
+                    {{ form_widget(form_register.startDate.date.year, {'attr': {'class': 'form-control', 'style' : 'height: 50px;'}}) }}
+
+                    {{ form_widget(form_register.startDate.time.hour, {'attr': {'class': 'form-control', 'style' : 'height: 50px;'}}) }}
+                    {{ form_widget(form_register.startDate.time.minute, {'attr': {'class': 'form-control', 'style' : 'height: 50px;'}}) }}
+
+                    {{ form_widget(form_register.startDate) }}
+                </div>
+            {% endblock %}
+
+            {% block b_duration %}
+                {{ form_label(form_register.duration) }}
+                <div class="form-group ev-date-control">
+                    {{ form_errors(form_register.duration) }}
+                    {{ form_widget(form_register.duration.hour, {'attr': {'class': 'form-control', 'style' : 'height: 50px;'}}) }}
+                    {{ form_widget(form_register.duration.minute, {'attr': {'class': 'form-control',  'style' : 'height: 50px;'}}) }}
+
+                    {{ form_widget(form_register.duration) }}
+                </div>
+            {% endblock %}
+
+            {% block b_cover %}
+                {{ form_label(form_register.coverImage) }}
+                <div class="form-group">
+                    <label for="event_create_coverImage" class="btn btn-big">
+                        Seleccionar Foto de Portada <i class="far fa-image"></i>
+                    </label>
+                    {{ form_errors(form_register.coverImage) }}
+                    {{ form_widget(form_register.coverImage, {'id' : 'event_create_coverImage','attr': {'class': 'sr-only'}}) }}
+                </div>
+            {% endblock %}
+
+            <label></label>
+            <div class="form-group">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.js"></script>
+                <div id="upload-image"></div>
+            </div>
+            <!--
+            <label></label>
+            <div class="form-group">
+                <img id="img_preview_cover_event" src="" alt="">
+            </div>
+-->
+            {% block b_showguestlist %}
+                {{ form_label(form_register.showguestlist) }}
+                <div class="form-group">
+                    {{ form_errors(form_register.showguestlist) }}
+                    <label class="switch">
+                        {{ form_widget(form_register.showguestlist) }}
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            {% endblock %}
+
+            {% block b_addr %}
+                {{ form_label(form_register.addressname) }}
+                <div class="form-group">
+                    {{ form_errors(form_register.addressname) }}
+                    {{ form_widget(form_register.addressname) }}
+                </div>
+            {% endblock %}
+
+            {% block b_wordskeys %}
+                {{ form_label(form_register.wordskeys) }}
+                <div class="form-group">
+                    {{ form_errors(form_register.wordskeys) }}
+                    {{ form_widget(form_register.wordskeys) }}
+                </div>
+            {% endblock %}
+
+            {{ form_widget(form_register.Registrar) }}
+
+            {{ form_end(form_register) }}
+    <!--
+                <main style="flex-direction: column;align-items: start;">
+                    <h1 style="display: block;
+                    max-width: 100%;
+                    font-size: 39px;
+                    font-weight: bold;
+                    grid-column: 1 / 3;
+                    grid-row: 1;">Nuevo Evento <i class="far fa-calendar-plus"></i></h1>
+                    {{ form_start(form_register, {'attr': {'novalidate': 'novalidate'}}) }}
+                    {{ form_widget(form_register) }}
+                    {{ form_end(form_register) }}
+                </main>-->
+        </main>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+    <script type="text/javascript">
+        $image_crop = $('#upload-image').croppie({
+
+            enableExif: true,
+            viewport: {
+                width: 400,
+                height: 250,
+                //type: 'circle'
+            },
+            boundary: {
+                width: 400,
+                height: 250,
+            }
+        });
+
+        $('#event_create_coverImage').on('change', function () {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $image_crop.croppie('bind', {
+                    url: e.target.result
+                }).then(function(){
+                    console.log('jQuery bind complete');
+                });
+            };
+            reader.readAsDataURL(this.files[0]);
+        });
+
+        $('#event_create_Registrar').on('click', function (ev) {
+            $image_crop.croppie('result', {
+                type: 'canvas',
+                size: 'viewport'
+            }).then(function (response) {
+                $('#event_create_thumb').val(response);
+            });
+        });
+
+    </script>
+{% endblock %}

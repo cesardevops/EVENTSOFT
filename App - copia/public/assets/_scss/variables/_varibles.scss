@@ -1,0 +1,14 @@
+// Configuraciones
+$dev: false !default;
+// grid variables
+$grid-columns: 12;
+$grid-max-width: 65em;
+$container: grid-content !default;
+// breakpoints
+$breakpoints: (
+  xs: 480px,
+  md: 768px,
+  xl: 1025px,
+  hd: 1400px
+);
+$sizes: map-keys($breakpoints);
