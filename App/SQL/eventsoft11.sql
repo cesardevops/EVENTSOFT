@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 17-02-2020 a las 21:19:22
+-- Tiempo de generación: 19-02-2020 a las 06:14:43
 -- Versión del servidor: 5.7.26
 -- Versión de PHP: 7.2.18
 
@@ -314,7 +314,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `email`, `password`, `roles`, `online`, `created_at`, `updated_at`, `name`, `surname`, `phone`, `address`, `gender`, `birthday`, `company`, `companyid`, `description`, `coverimage`, `coverprofile`, `photo`, `timezone`) VALUES
 (12, 'cesar.freitas.dev@gmail.com', '$2y$04$DS4p53BVOM8RbcqDCkCZZOiOaNx.87SYFKwgeoXNVGfnbGr4jCozm', '\"ROLE_USER\"', NULL, '2020-02-11 00:33:55', '2020-02-11 00:33:55', 'Cesar', 'Freitas', '950896817', NULL, '1', '1900-01-01 00:00:00', '', '73095092', 'hellow', NULL, 'ev-db-images-5e4995a2a576f5e4995a2a5773.jpg', '1', 'America/New_York'),
-(14, 'novia.hermosa@gmail.com', '$2y$04$2CtYNWl9H.bdB57SZKFCaODUQHr7ieP4Ef4g7OE05.N9cLzBregwS', '\"ROLE_USER\"', NULL, '2020-02-11 20:46:59', '2020-02-11 20:46:59', 'Isabel Fiorella', 'Llallico Quispe', '960737473', NULL, '0', '1997-05-12 00:00:00', NULL, NULL, NULL, NULL, '5e435913039e9.jpg', '1', 'America/New_York');
+(14, 'novia.hermosa@gmail.com', '$2y$04$DS4p53BVOM8RbcqDCkCZZOiOaNx.87SYFKwgeoXNVGfnbGr4jCozm', '\"ROLE_USER\"', NULL, '2020-02-11 20:46:59', '2020-02-11 20:46:59', 'Isabel Fiorella', 'Llallico Quispe', '960737473', NULL, '0', '1997-05-12 00:00:00', NULL, NULL, NULL, NULL, 'ev-db-images-5e4c1f7ca4d105e4c1f7ca4d13.jpg', '1', 'America/New_York');
 
 -- --------------------------------------------------------
 
@@ -333,7 +333,20 @@ CREATE TABLE IF NOT EXISTS `userxevent` (
   PRIMARY KEY (`id`),
   KEY `fk_userxevent_user1_idx` (`user_id`),
   KEY `fk_userxevent_event1_idx` (`event_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `userxevent`
+--
+
+INSERT INTO `userxevent` (`id`, `attended`, `check_in`, `user_id`, `event_id`, `interest`) VALUES
+(8, 1, '2020-02-18 14:58:01', 12, 16, 0),
+(9, 0, '2020-02-18 14:51:03', 12, 11, 1),
+(10, 1, '2020-02-19 01:08:12', 12, 7, 0),
+(11, 1, '2020-02-18 15:00:49', 14, 11, 0),
+(12, 1, '2020-02-18 15:00:45', 14, 5, 0),
+(13, 0, '2020-02-18 12:32:11', 14, 14, 1),
+(14, 1, '2020-02-19 01:04:22', 14, 16, 0);
 
 --
 -- Restricciones para tablas volcadas
