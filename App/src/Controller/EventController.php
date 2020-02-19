@@ -180,8 +180,6 @@ class EventController extends AbstractController
         $events = $repo->getMyinterest($_FIRSTRESULT, $_MAXTRESULT, $_USERSESSION->getId());
 
         return new JsonResponse($events,200);
-
-
     }
 
     /**
@@ -209,5 +207,20 @@ class EventController extends AbstractController
         ];
         return new JsonResponse($result,200);
     }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function GetIwillGo(Request $request){
+        $_USERSESSION = $this->getUser();
+        $_FIRSTRESULT    = $request->get("firstResult", null);
+        $_MAXTRESULT    = $request->get("maxtResult", null);
+        $repo = $this->getDoctrine()->getRepository(Event::class);
+        $events = $repo->getMyLoves($_FIRSTRESULT, $_MAXTRESULT, $_USERSESSION->getId());
+
+        return new JsonResponse($events,200);
+    }
+
 
 }

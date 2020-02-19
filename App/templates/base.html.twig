@@ -42,9 +42,11 @@
         <nav>
             <ul>
                 {% if app.user %}
-                    <li class="media-hidden"><a href="{{ path('view_interest') }}">Mis Intereses</a></li>
-                    <li class="media-hidden"><a href="{{ path('whereiwillgo') }}">Eventos A Los Que Ire</a></li>
-                    <li class="media-hidden"><a href="#">Mis Eventos</a></li>
+
+                    <li class="media-hidden"><a href="{{ path('event') }}" class="especial-link" data-toggle="tooltip" data-placement="bottom" title="Inicio"><i class="fas fa-home"></i></a></li>
+                    <li class="media-hidden"><a href="{{ path('view_interest') }}" class="especial-link" data-toggle="tooltip" data-placement="bottom" title="Mis intereses"><i class="fas fa-star"></i></a></li>
+                    <li class="media-hidden"><a href="{{ path('whereiwillgo') }}" class="especial-link" data-toggle="tooltip" data-placement="bottom" title="Eventos a los que iré"><i class="fas fa-heart"></i></a></li>
+                    <li class="media-hidden"><a href="#"  class="especial-link"><i class="far fa-calendar-alt" data-toggle="tooltip" data-placement="bottom" title="Mis eventos creados"></i></a></li>
                 {% else %}
                     <li class="media-hidden"><a href="{{ path('login') }}">Login</a></li>
                     <li class="media-hidden"><a href="{{ path('register') }}">Register</a></li>
@@ -56,7 +58,7 @@
                             display: flex;
                             ">
                         {% if app.user %}
-                            <span class="media-hidden">{{ app.user.name }}</span>
+                            <span class="media-hidden" style="font-size: 120%;">{{ app.user.name }}</span>
 
                             {% if app.user.photo == 1 %}
                                 <div class="ev-avatar" id="profile-result"><img id="ev-avatar" src="{{asset(varGlobImgAvatars~app.user.coverprofile)}}"></div>
@@ -83,8 +85,9 @@
                     </a>
                     <ul class="dropdown-menu">
                         {% if app.user %}
-                            <li class="media-show"><a href="#"><i class="fas fa-star ev-drop-menu"></i> Mis Intereses</a></li>
-                            <li class="media-show"><a href="#"><i class="far fa-calendar-alt ev-drop-menu"></i> Eventos A Los Que Ire</a></li>
+                            <li class="media-show"><a href="{{ path('event') }}"><i class="fas fa-home ev-drop-menu"></i> Inicio</a></li>
+                            <li class="media-show"><a href="{{ path('view_interest') }}"><i class="fas fa-star ev-drop-menu"></i> Mis Intereses</a></li>
+                            <li class="media-show"><a href="{{ path('whereiwillgo') }}"><i class="fas fa-heart ev-drop-menu"></i> Eventos A Los Que Ire</a></li>
                             <li class="media-show"><a href="#"><i class="far fa-calendar-alt ev-drop-menu"></i> Mis Eventos</a></li>
                             <li><a href="#"><i class="fas fa-cog ev-drop-menu"></i> Configuración De La Cuenta</a></li>
                             <li><a href="{{ path('edit_my_profile') }}"><i class="fas fa-user-edit ev-drop-menu"></i> Editar Mi Perfil</a></li>

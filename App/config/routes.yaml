@@ -53,6 +53,11 @@ whereiwillgo:
     path: /events/whereiwillgo
     controller: App\Controller\EventController::whereiwillgo
 
+GetIwillGo:
+    path: /events/whereiwillgo/load
+    controller: App\Controller\EventController::GetIwillGo
+    methods: POST
+
 test:
     path: /event
     controller: App\Controller\EventController::test

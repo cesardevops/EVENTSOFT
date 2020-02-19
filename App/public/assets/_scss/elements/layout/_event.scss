@@ -82,6 +82,27 @@ header {
     margin-top: 80px !important;
 }
 
+a.especial-link{
+  font-size: 120%;
+}
+/* effect-shine */
+a.especial-link:hover {
+  color: #4481eb;
+  -webkit-mask-image: linear-gradient(-75deg, rgba(0,0,0,.6) 30%, #000 50%, rgba(0,0,0,.6) 70%);
+  -webkit-mask-size: 200%;
+  animation: shine 2s infinite;
+}
+
+@-webkit-keyframes shine {
+  from {
+    -webkit-mask-position: 150%;
+  }
+
+  to {
+    -webkit-mask-position: -50%;
+  }
+}
+
 footer {
     flex: 0 0 auto;
 }
@@ -174,6 +195,7 @@ footer {
     text-align: center;
 }
 
+
 .ev-logo div {
     transform: rotate(-45deg);
     color: white;
@@ -195,6 +217,12 @@ footer {
     -webkit-text-fill-color: transparent;
 }
 
+.ev-logo span:hover{
+  -webkit-mask-image: linear-gradient(-75deg, rgba(0,0,0,.8) 30%, #000 50%, rgba(0,0,0,.8) 70%);
+  -webkit-mask-size: 200%;
+  animation: shine 2s infinite;
+}
+
 ul,
 li {
     list-style-type: none;
@@ -204,8 +232,7 @@ li {
 nav ul {
     display: inline-flex;
     line-height: 50px;
-    text-transform: uppercase;
-    font-size: 13px;
+    font-size: 14px;
   }
 
 nav a {

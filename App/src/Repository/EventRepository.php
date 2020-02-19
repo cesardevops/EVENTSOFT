@@ -86,5 +86,26 @@ class EventRepository extends ServiceEntityRepository
 
     }
 
+    public function getMyLoves($firstResult = 0, $maxResult = 5, $userid){
 
+        $parameters = [
+            'iduser' => $userid,
+        ];
+        $query_view = "SELECT COUNT(e.id) AS total FROM App:Userxevent e  WHERE e.user = :iduser AND e.interest = 0 AND e.attended = 1 ";
+        $query =    $this->getEntityManager()
+            ->createQuery($query_view)->setParameters($parameters);
+        $total =  $query->execute();
+
+        $_query_result = " SELECT ex.id as userxevent,e.id, e.title, e.shortdescription, e.startDate, e.thumb, e.duration FROM App:Userxevent ex  INNER JOIN App:Event e WITH ex.event = e.id  WHERE ex.user = ".$userid." AND ex.interest = 0 AND ex.attended = 1 ";
+        $result =    $this->getEntityManager()->createQuery($_query_result)->setFirstResult($firstResult)->setMaxResults($maxResult)->getResult();;
+
+        $_Response = array(
+            "status"        => Response::HTTP_ACCEPTED,
+            "total"         =>  ($total[0]['total']*1),
+            "pages"         => ceil( ($total[0]['total'] / $maxResult)),
+            'eventos'    => $result,
+        );
+        return $_Response;
+
+    }
 }
