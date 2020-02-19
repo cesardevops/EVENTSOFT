@@ -49,6 +49,11 @@ set_assistant:
     controller: App\Controller\EventController::SetAssistant
     methods: POST
 
+leave_assistant:
+    path: /event/remove/assistant
+    controller: App\Controller\EventController::LeaveAssistant
+    methods: POST
+
 whereiwillgo:
     path: /events/whereiwillgo
     controller: App\Controller\EventController::whereiwillgo

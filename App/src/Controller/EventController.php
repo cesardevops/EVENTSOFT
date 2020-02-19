@@ -222,5 +222,20 @@ class EventController extends AbstractController
         return new JsonResponse($events,200);
     }
 
+    public function LeaveAssistant(Request $request){
+        $_USERXEVENT    = $request->get("id", null);
+
+        $repo = $this->getDoctrine()->getRepository(Userxevent::class);
+        $USER_x_EVENT = $repo->find($_USERXEVENT);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($USER_x_EVENT);
+        $em->flush();
+
+        $result = [
+            "status"    => 'ok',
+        ];
+        return new JsonResponse($result,200);
+    }
 
 }
