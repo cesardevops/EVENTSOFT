@@ -13,7 +13,6 @@ if($method == "OPTIONS") {
     die();
 }
 
-
 require dirname(__DIR__).'/config/bootstrap.php';
 
 if ($_SERVER['APP_DEBUG']) {

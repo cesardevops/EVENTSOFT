@@ -35,10 +35,10 @@ edit_my_profile:
     path:       /my-profile/edit
     controller: App\Controller\UserController::edit
 
-upload_cover_profile:
-    path:       /my-profile/photo-new
+set_photo:
+    path: /my-profile/photo-new
     controller: App\Controller\UserController::editphoto
-    methods:    POST
+    methods: POST
 
 set_interest:
     path:   /event/plus/interest

@@ -131,32 +131,66 @@
 
 {% block javascripts %}
     {{ parent() }}
-<script type="text/javascript">
-    $image_crop = $('#upload-image').croppie({
+    <script type="text/javascript">
+        /**
+         * Convert a base64 string in a Blob according to the data and contentType.
+         *
+         * @param b64Data {String} Pure base64 string without contentType
+         * @param contentType {String} the content type of the file i.e (image/jpeg - image/png - text/plain)
+         * @param sliceSize {Int} SliceSize to process the byteCharacters
+         * @see http://stackoverflow.com/questions/16245767/creating-a-blob-from-a-base64-string-in-javascript
+         * @return Blob
+         */
+        function b64toBlob(b64Data, contentType, sliceSize) {
+            contentType = contentType || '';
+            sliceSize = sliceSize || 512;
 
-        url: '{{asset(varGlobImgAvatars~app.user.coverprofile)}}',
-        enableExif: true,
-        viewport: {
-        width: 250,
-        height: 250,
-        type: 'circle'
-    },
-    boundary: {
-    width: 250,
-    height: 250,
-    }
-    });
-    $('#photo_user').on('change', function () {
-    var reader = new FileReader();
-    reader.onload = function (e) {
-        $image_crop.croppie('bind', {
-        url: e.target.result
-        }).then(function(){
-        console.log('jQuery bind complete');
+            var byteCharacters = atob(b64Data);
+            var byteArrays = [];
+
+            for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+                var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+                var byteNumbers = new Array(slice.length);
+                for (var i = 0; i < slice.length; i++) {
+                    byteNumbers[i] = slice.charCodeAt(i);
+                }
+
+                var byteArray = new Uint8Array(byteNumbers);
+
+                byteArrays.push(byteArray);
+            }
+
+            var blob = new Blob(byteArrays, {type: contentType});
+            return blob;
+        }
+
+
+        $image_crop = $('#upload-image').croppie({
+
+            url: '{{asset(varGlobImgAvatars~app.user.coverprofile)}}',
+            enableExif: true,
+            viewport: {
+                width: 250,
+                height: 250,
+                type: 'circle'
+            },
+            boundary: {
+                width: 250,
+                height: 250,
+            }
         });
-    }
-        reader.readAsDataURL(this.files[0]);
-    });
+        $('#photo_user').on('change', function () {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $image_crop.croppie('bind', {
+                    url: e.target.result
+                }).then(function(){
+                    console.log('jQuery bind complete');
+                });
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
 
         $('.cropped_image').on('click', function (ev) {
             ev.preventDefault();
@@ -164,25 +198,49 @@
                 type: 'canvas',
                 size: 'viewport'
             }).then(function (response) {
-                var form_photo = new FormData();
-                form_photo.append('image',response);
+                var midata = new FormData();
+                var photo = JSON.stringify(response);
+                midata.append('imgb64', photo);
+
+
+
+                // Split the base64 string in data and contentType
+                var block = response.split(";");
+// Get the content type of the image
+                var contentType = block[0].split(":")[1];// In this case "image/gif"
+// get the real base64 content of the file
+                var realData = block[1].split(",")[1];// In this case "R0lGODlhPQBEAPeoAJosM...."
+
+// Convert it to a blob to upload
+                var blob = b64toBlob(realData, contentType);
+
+// Create a FormData and append the file with "image" as parameter name
+                var formDataToUpload = new FormData();
+                formDataToUpload.append("image", blob);
+
+
                 $.ajax({
-                    url: '{{ path('upload_cover_profile') }}',//URL_EVENTSOFT + '/my-profile/photo-new',
-                    //type: "POST",
-                    //data: form_photo,
-                    type: 'POST',
-                    contentType: false,
-                    data: form_photo,  // mandamos el objeto formdata que se igualo a la variable data
-                    processData: false,
-                    cache: false,
-                    //data: {"image":response},
-                    success: function (data) {
+                    url: URL_EVENTSOFT + "/my-profile/photo-new",
+                    data: formDataToUpload,// Add as Data the Previously create formData
+                    type:"POST",
+                    contentType:false,
+                    processData:false,
+                    cache:false,
+                    dataType:"json", // Change this according to your response from the server.
+                    error:function(err){
+                        console.error(err);
+                    },
+                    success:function(data){
                         console.log(data);
                         $("#ev-avatar").attr("src",URL_PUBLIC+data.img);
+                    },
+                    complete:function(){
+                        console.log("Request finished.");
                     }
                 });
+
             });
         });
 
-</script>
+    </script>
 {% endblock %}

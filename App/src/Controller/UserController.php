@@ -109,8 +109,6 @@ class UserController extends AbstractController
 
             $encoded = $encoder->encodePassword($_USER,$_USER->getPassword());
             $_USER->setPassword($encoded);
-            var_dump($_USER);
-
             # SAVE USER
             $_EM = $this->getDoctrine()->getManager();
             $_EM->persist($_USER);
@@ -122,33 +120,23 @@ class UserController extends AbstractController
             "form_register" => $FRM->createView(),
         ]);
     }
+
+
     public function editphoto(Request $request){
         $_USERSESSION   = $this->getUser();
         $_id            = $_USERSESSION->getId();
-        $_PHOTOBLOOB    = $request->request->get("image", null);
-
         $entityManager = $this->getDoctrine()->getManager();
         $user = $entityManager->getRepository(User::class)->find($_id);
 
-        $result = [
-            'status' => 'bad',
-        ];
         if(!empty($user))
         {
-            $name_image = 'ev-db-images-'.uniqid().uniqid().'.jpg';
-            $filesystem = new Filesystem();
-            $filesystem->touch('images/users/avatars/'.$name_image);
-            $user->setCoverprofile($name_image);
-
-
-            $in = fopen($_PHOTOBLOOB, "rb");
-            $out = fopen('images/users/avatars/'.$user->getCoverprofile(), "wb");
-            while ($chunk = fread($in, 8192)) {
-                fwrite($out, $chunk, 8192);
-            }
-            fclose($in);
-            fclose($out);
-
+            $file = $request->files->get('image');
+            $newFilename = "ev-avatar-user-".uniqid().'.'.$file->guessExtension();
+            $file->move(
+                $this->getParameter('imgAvatars'),
+                $newFilename
+            );
+            $user->setCoverprofile($newFilename);
             $user->setPhoto('1');
             # SAVE USER
             $_EM = $this->getDoctrine()->getManager();
@@ -157,13 +145,10 @@ class UserController extends AbstractController
 
             $result = [
                 'status' => 'ok',
-                'blob' => $_PHOTOBLOOB,
-                'img' => 'images/users/avatars/'.$name_image
+                'img' => 'images/users/avatars/'.$newFilename
             ];
         }
-
         return new JsonResponse($result,200);
-
     }
 
 }

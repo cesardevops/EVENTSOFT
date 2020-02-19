@@ -58,7 +58,7 @@
                             display: flex;
                             ">
                         {% if app.user %}
-                            <span class="media-hidden" style="font-size: 120%;">{{ app.user.name }}</span>
+                            <span class="media-hidden" style="font-size: 120%;"> {{ app.user.name }}</span>
 
                             {% if app.user.photo == 1 %}
                                 <div class="ev-avatar" id="profile-result"><img id="ev-avatar" src="{{asset(varGlobImgAvatars~app.user.coverprofile)}}"></div>
