@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="340f4f80-7954-4c30-b5fb-e3abce7fec9b" name="Default Changelist" comment="" />
+    <list default="true" id="340f4f80-7954-4c30-b5fb-e3abce7fec9b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../App - copia/bin.zip" beforeDir="false" afterPath="$PROJECT_DIR$/../App - copia/bin.zip" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -189,7 +191,7 @@
       <workItem from="1581456017949" duration="7911000" />
       <workItem from="1581569478140" duration="3751000" />
       <workItem from="1581693313826" duration="16760000" />
-      <workItem from="1581773604737" duration="97899000" />
+      <workItem from="1581773604737" duration="98505000" />
     </task>
     <servers />
   </component>
